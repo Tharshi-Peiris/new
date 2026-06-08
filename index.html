@@ -52,7 +52,11 @@
       text-decoration: none;
     }
 
-    .nav-brand svg { width: 28px; height: 28px; }
+    .nav-brand img {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
 
     .nav-links {
       display: flex;
@@ -393,10 +397,10 @@
   <!-- NAVBAR -->
   <nav>
     <a href="#home" class="nav-brand">
-      <!-- flame icon -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2C6.48 2 2 6.48 2 12c0 3.54 1.84 6.65 4.6 8.44C7.5 15.5 10 13 10 10c1 2 3 4 3 7a8 8 0 1 0-1-15z"/>
-      </svg>
+      <img
+        src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo.png"
+        alt="Premium Charcoal Co. logo"
+      />
       Premium Charcoal Co.
     </a>
     <ul class="nav-links">
