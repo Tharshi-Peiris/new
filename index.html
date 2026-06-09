@@ -45,11 +45,22 @@
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
       text-decoration: none;
     }
 
     .nav-brand img {
+      height: 78px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-center img {
       height: 78px;
       width: auto;
       object-fit: contain;
@@ -375,6 +386,7 @@
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { gap: 16px; }
+      .nav-center { display: none; }
       #about, #products, #contact { padding: 60px 20px; }
       .contact-grid { gap: 36px; }
     }
@@ -392,11 +404,15 @@
         src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_1.png"
         alt="Premium Charcoal Co. logo"
       />
+    </a>
+
+    <div class="nav-center">
       <img
         src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_2.png"
         alt="Second logo"
       />
-    </a>
+    </div>
+
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#products">Products</a></li>
