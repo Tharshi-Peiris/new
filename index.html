@@ -12,6 +12,7 @@
       --orange: #E8490F;
       --orange-hover: #c93d0c;
       --dark: #1a1a1a;
+      --nav-bg: #000000;
       --white: #ffffff;
       --gray-bg: #f4f4f4;
       --text-muted: #666;
@@ -45,17 +46,25 @@
       display: flex;
       align-items: center;
       text-decoration: none;
-      cursor: pointer;
     }
 
-    .nav-brand img { height: 78px; width: auto; object-fit: contain; }
+    .nav-brand img {
+      height: 78px;
+      width: auto;
+      object-fit: contain;
+    }
 
     .nav-center {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
     }
-    .nav-center img { height: 78px; width: auto; object-fit: contain; }
+
+    .nav-center img {
+      height: 78px;
+      width: auto;
+      object-fit: contain;
+    }
 
     .nav-links {
       display: flex;
@@ -63,6 +72,7 @@
       gap: 32px;
       list-style: none;
     }
+
     .nav-links a {
       color: #ffffff;
       text-decoration: none;
@@ -74,8 +84,21 @@
     }
     .nav-links a:hover { opacity: 1; }
 
-    .nav-login { display: flex; align-items: center; gap: 6px; color: #ffffff !important; font-weight: 700; }
-    .btn-signup { display: flex; align-items: center; gap: 6px; color: #ffffff !important; font-weight: 700; }
+    .nav-login {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff !important;
+      font-weight: 700;
+    }
+
+    .btn-signup {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff !important;
+      font-weight: 700;
+    }
     .btn-signup:hover { transform: translateY(-1px); }
 
     /* ── HERO ── */
@@ -142,7 +165,6 @@
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
       text-decoration: none;
-      display: inline-block;
     }
     .btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); }
 
@@ -164,121 +186,12 @@
     }
     .btn-outline:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); }
 
-    /* ── MODAL OVERLAY ── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal-overlay.active { display: flex; }
-
-    .modal-box {
-      background: #fff;
-      border-radius: 16px;
-      padding: 40px 36px 32px;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      animation: popIn 0.22s ease both;
-    }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.93); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 18px;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #999;
-      line-height: 1;
-    }
-    .modal-close:hover { color: #333; }
-
-    .modal-icon {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background: #FEE9DC;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-    }
-    .modal-icon svg { width: 34px; height: 34px; }
-
-    .modal-box h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 1.3rem;
-      color: var(--text-dark);
-      margin-bottom: 10px;
-    }
-
-    .modal-box p {
-      font-size: 0.97rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
-
-    .modal-box p strong {
-      color: var(--text-dark);
-      font-weight: 600;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-modal-login {
-      background: var(--orange);
-      color: #fff;
-      border: none;
-      padding: 13px 30px;
-      border-radius: 9px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-    .btn-modal-login:hover { background: var(--orange-hover); transform: translateY(-1px); }
-
-    .btn-modal-signup {
-      background: var(--dark);
-      color: #fff;
-      border: none;
-      padding: 13px 30px;
-      border-radius: 9px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-    .btn-modal-signup:hover { background: #333; transform: translateY(-1px); }
-
     /* ── WHY SECTION ── */
-    #about { padding: 90px 48px; text-align: center; background: #fff; }
+    #about {
+      padding: 90px 48px;
+      text-align: center;
+      background: #fff;
+    }
 
     .section-title {
       font-family: 'Montserrat', sans-serif;
@@ -296,19 +209,47 @@
       margin: 0 auto;
     }
 
-    .feature-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
 
-    .feature-icon { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .icon-orange { background: #FEE9DC; }
     .icon-green  { background: #D6F5E3; }
     .icon-blue   { background: #DCE8FD; }
+
     .feature-icon svg { width: 36px; height: 36px; }
 
-    .feature-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; }
-    .feature-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; max-width: 280px; }
+    .feature-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 280px;
+    }
 
     /* ── PRODUCTS ── */
-    #products { padding: 90px 48px; background: var(--gray-bg); }
+    #products {
+      padding: 90px 48px;
+      background: var(--gray-bg);
+    }
+
     #products .section-title { text-align: center; }
 
     .products-grid {
@@ -327,13 +268,38 @@
       transition: transform 0.25s, box-shadow 0.25s;
     }
     .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 28px rgba(0,0,0,0.13); }
-    .product-card img { width: 100%; height: 260px; object-fit: cover; }
-    .product-body { padding: 28px; }
-    .product-body h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 10px; }
-    .product-body p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
 
-    .product-features { list-style: none; margin-bottom: 24px; }
-    .product-features li { font-size: 0.9rem; color: var(--text-muted); padding: 3px 0; }
+    .product-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .product-body { padding: 28px; }
+
+    .product-body h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .product-body p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .product-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .product-features li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 3px 0;
+    }
     .product-features li::before { content: "• "; color: var(--orange); font-weight: 700; }
 
     .btn-dark {
@@ -353,13 +319,40 @@
     .btn-dark:hover { background: #333; transform: translateY(-1px); }
 
     /* ── CONTACT ── */
-    #contact { padding: 90px 48px; background: #fff; text-align: center; }
+    #contact {
+      padding: 90px 48px;
+      background: #fff;
+      text-align: center;
+    }
 
-    .contact-grid { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; margin-bottom: 48px; }
-    .contact-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .contact-grid {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact-icon { color: var(--orange); }
     .contact-icon svg { width: 36px; height: 36px; }
-    .contact-item h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; }
-    .contact-item p { font-size: 0.92rem; color: var(--text-muted); }
+
+    .contact-item h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .contact-item p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
 
     .btn-contact {
       display: inline-flex;
@@ -396,7 +389,6 @@
       .nav-center { display: none; }
       #about, #products, #contact { padding: 60px 20px; }
       .contact-grid { gap: 36px; }
-      .modal-box { padding: 32px 22px 26px; }
     }
     @media (max-width: 560px) {
       .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
@@ -405,38 +397,20 @@
 </head>
 <body>
 
-  <!-- AUTH MODAL -->
-  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-box">
-      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-
-      <div class="modal-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#E8490F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-      </div>
-
-      <h3 id="modalTitle">Login Required</h3>
-      <p id="modalMessage">
-        You need to be logged in to <strong id="modalAction">place an order</strong>.<br>
-        Please log in or create a free account to continue.
-      </p>
-
-      <div class="modal-actions">
-        <a href="login.html" class="btn-modal-login" id="modalLoginBtn">Log In</a>
-        <a href="signup.html" class="btn-modal-signup">Create Account</a>
-      </div>
-    </div>
-  </div>
-
   <!-- NAVBAR -->
   <nav>
-    <a href="#home" class="nav-brand" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
-      <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_1.png" alt="Premium Charcoal Co. logo" />
+    <a href="#home" class="nav-brand">
+      <img
+        src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_1.png"
+        alt="Premium Charcoal Co. logo"
+      />
     </a>
 
     <div class="nav-center">
-      <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_2.png" alt="Second logo" />
+      <img
+        src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_2.png"
+        alt="Second logo"
+      />
     </div>
 
     <ul class="nav-links">
@@ -462,8 +436,8 @@
       <h1>Premium Quality Charcoal</h1>
       <p>Handcrafted charcoal for the perfect burn, every time</p>
       <div class="hero-btns">
-        <a href="#products" class="btn-primary" id="btn-order">Order Now</a>
-        <a href="#contact" class="btn-outline" id="btn-quote">
+        <a href="#products" class="btn-primary">Order Now</a>
+        <a href="#contact" class="btn-outline">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
           </svg>
@@ -598,60 +572,6 @@
   <footer>
     <p>© 2024 <span>Premium Charcoal Co.</span> — All rights reserved.</p>
   </footer>
-
-  <script>
-    function isLoggedIn() {
-      return localStorage.getItem('isLoggedIn') === 'true';
-    }
-
-    const modal        = document.getElementById('authModal');
-    const modalAction  = document.getElementById('modalAction');
-    const modalLoginBtn = document.getElementById('modalLoginBtn');
-
-    function showAuthModal(actionLabel, redirectAfterLogin) {
-      modalAction.textContent = actionLabel;
-      // Save where to go after login
-      localStorage.setItem('loginRedirect', redirectAfterLogin);
-      // Append redirect param to login button href
-      modalLoginBtn.href = 'login.html';
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    // Close on X button
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-
-    // Close when clicking outside the box
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) closeModal();
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Order Now button
-    document.getElementById('btn-order').addEventListener('click', function(e) {
-      if (!isLoggedIn()) {
-        e.preventDefault();
-        showAuthModal('place an order', '#products');
-      }
-    });
-
-    // Request Quote button
-    document.getElementById('btn-quote').addEventListener('click', function(e) {
-      if (!isLoggedIn()) {
-        e.preventDefault();
-        showAuthModal('request a quote', '#contact');
-      }
-    });
-  </script>
 
 </body>
 </html>
