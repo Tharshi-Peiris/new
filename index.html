@@ -46,6 +46,7 @@
       display: flex;
       align-items: center;
       text-decoration: none;
+      cursor: pointer;
     }
 
     .nav-brand img {
@@ -165,6 +166,7 @@
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
       text-decoration: none;
+      display: inline-block;
     }
     .btn-primary:hover { background: var(--orange-hover); transform: translateY(-2px); }
 
@@ -399,7 +401,8 @@
 
   <!-- NAVBAR -->
   <nav>
-    <a href="#home" class="nav-brand">
+    <!-- Logo links to top of page -->
+    <a href="#home" class="nav-brand" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
       <img
         src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_1.png"
         alt="Premium Charcoal Co. logo"
@@ -436,8 +439,10 @@
       <h1>Premium Quality Charcoal</h1>
       <p>Handcrafted charcoal for the perfect burn, every time</p>
       <div class="hero-btns">
-        <a href="#products" class="btn-primary">Order Now</a>
-        <a href="#contact" class="btn-outline">
+        <!-- Order Now: requires login -->
+        <a href="#products" class="btn-primary" id="btn-order">Order Now</a>
+        <!-- Request Quote: requires login -->
+        <a href="#contact" class="btn-outline" id="btn-quote">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
           </svg>
@@ -572,6 +577,32 @@
   <footer>
     <p>© 2024 <span>Premium Charcoal Co.</span> — All rights reserved.</p>
   </footer>
+
+  <script>
+    // ── Auth guard for Order Now & Request Quote buttons ──
+    // Check if user is logged in via localStorage flag (set by login.html on successful login)
+    function isLoggedIn() {
+      return localStorage.getItem('isLoggedIn') === 'true';
+    }
+
+    function requireLogin(e, destination) {
+      if (!isLoggedIn()) {
+        e.preventDefault();
+        // Save intended destination so login.html can redirect back after login
+        localStorage.setItem('loginRedirect', destination);
+        window.location.href = 'login.html';
+      }
+      // If logged in, default link behaviour takes over (no preventDefault)
+    }
+
+    document.getElementById('btn-order').addEventListener('click', function(e) {
+      requireLogin(e, '#products');
+    });
+
+    document.getElementById('btn-quote').addEventListener('click', function(e) {
+      requireLogin(e, '#contact');
+    });
+  </script>
 
 </body>
 </html>
