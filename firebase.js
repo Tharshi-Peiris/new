@@ -1,7 +1,6 @@
 // Firebase SDK මොඩියුල ගෙන්වා ගැනීම
-import { initializeApp } from "https://gstatic.com";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://gstatic.com";
-
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 // පියවර 4 හි ලැබුණු ඔබේ Firebase Config එක මෙතනට දමන්න
 const firebaseConfig = {
   apiKey: "AIzaSyCabOf-rYYZ2eV6Bu1BApKyqYyd8nHSYYQ",
