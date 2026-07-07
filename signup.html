@@ -370,6 +370,58 @@
     }
     footer span { color: var(--orange); }
 
+    /* ── SUCCESS MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17,17,17,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      animation: fadeIn 0.25s ease forwards;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 40px;
+      max-width: 380px;
+      width: 90%;
+      text-align: center;
+      transform: translateY(14px) scale(0.97);
+      animation: popIn 0.3s ease forwards;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+    @keyframes popIn { to { transform: translateY(0) scale(1); } }
+
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(34,168,90,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+    }
+    .modal-icon svg { width: 30px; height: 30px; color: var(--success); }
+
+    .modal-box h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .modal-box p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
     @media (max-width: 900px) {
       .field-row { grid-template-columns: 1fr; }
     }
@@ -559,7 +611,7 @@
   </footer>
 
   <script type="module">
-    import { handleSignUp as firebaseSignUp } from './js/firebase.js';
+    import { handleSignUp as firebaseSignUp, saveUserProfile } from './js/firebase.js';
 
     function togglePw(inputId, btn) {
       const input = document.getElementById(inputId);
@@ -596,6 +648,24 @@
       if (input) input.style.borderColor = isError ? '#e53e3e' : '#ddd';
     }
 
+    // Shows a real success popup instead of just changing the button text.
+    function showSuccessModal(fname) {
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+      overlay.innerHTML = `
+        <div class="modal-box">
+          <div class="modal-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h3>Welcome${fname ? ', ' + fname : ''}!</h3>
+          <p>You've signed up successfully. Redirecting you to sign in…</p>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
     function handleSignup() {
       let valid = true;
 
@@ -614,6 +684,8 @@
       showError('email-error', !emailOk);
       setFieldState('email', !emailOk);
       if (!emailOk) valid = false;
+
+      const phone = document.getElementById('phone').value.trim();
 
       const pw = document.getElementById('password').value;
       showError('pw-error', pw.length < 8);
@@ -636,12 +708,19 @@
       btn.disabled = true;
 
       firebaseSignUp(email, pw)
+        .then((userCredential) => {
+          const uid = userCredential.user.uid;
+          // Save the extra profile fields (name, phone) to Firestore
+          // under /users/{uid}, since Firebase Auth only stores email/password.
+          return saveUserProfile(uid, { fname, lname, phone, email });
+        })
         .then(() => {
           btn.style.background = '#22a85a';
           btn.textContent = 'Account created!';
+          showSuccessModal(fname);
           setTimeout(() => {
             window.location.href = 'login.html';
-          }, 1000);
+          }, 1800);
         })
         .catch((error) => {
           btn.textContent = 'Create My Account';
