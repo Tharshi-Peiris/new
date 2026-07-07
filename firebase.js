@@ -7,6 +7,12 @@ import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 // ඔබේ Firebase Config එක
 const firebaseConfig = {
@@ -22,11 +28,22 @@ const firebaseConfig = {
 // Firebase Initialize කිරීම
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // 1. SIGN UP (ලියාපදිංචි වීම) — returns a Promise so the calling page
 //    can handle success/error UI itself.
 export function handleSignUp(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
+}
+
+// 1b. SAVE PROFILE — writes the extra signup fields (name, phone, etc.)
+//     into Firestore under /users/{uid}. Call this right after
+//     handleSignUp succeeds, passing the new user's uid.
+export function saveUserProfile(uid, data) {
+  return setDoc(doc(db, "users", uid), {
+    ...data,
+    createdAt: serverTimestamp()
+  });
 }
 
 // 2. LOGIN (ඇතුළු වීම) — only succeeds for accounts that already exist.
