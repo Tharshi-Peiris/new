@@ -263,6 +263,7 @@
       box-shadow: 0 6px 20px rgba(232,73,15,0.3);
     }
     .btn-signup:active { transform: translateY(0); }
+    .btn-signup:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
     .divider {
       display: flex;
@@ -557,7 +558,9 @@
     <p>© 2024 <span>Premium Charcoal Co.</span> — All rights reserved.</p>
   </footer>
 
-  <script>
+  <script type="module">
+    import { handleSignUp as firebaseSignUp } from './js/firebase.js';
+
     function togglePw(inputId, btn) {
       const input = document.getElementById(inputId);
       const isText = input.type === 'text';
@@ -626,16 +629,50 @@
       showError('terms-error', !terms);
       if (!terms) valid = false;
 
-      if (valid) {
-        const btn = document.querySelector('.btn-signup');
-        btn.textContent = 'Creating account…';
-        btn.disabled = true;
-        btn.style.background = '#22a85a';
-        setTimeout(() => {
-          window.location.href = 'login.html';
-        }, 1400);
-      }
+      if (!valid) return;
+
+      const btn = document.querySelector('.btn-signup');
+      btn.textContent = 'Creating account…';
+      btn.disabled = true;
+
+      firebaseSignUp(email, pw)
+        .then(() => {
+          btn.style.background = '#22a85a';
+          btn.textContent = 'Account created!';
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1000);
+        })
+        .catch((error) => {
+          btn.textContent = 'Create My Account';
+          btn.disabled = false;
+
+          const emailErr = document.getElementById('email-error');
+          const pwErr = document.getElementById('pw-error');
+
+          if (error.code === 'auth/email-already-in-use') {
+            emailErr.textContent = 'This email is already registered. Try signing in instead.';
+            emailErr.style.display = 'block';
+            setFieldState('email', true);
+          } else if (error.code === 'auth/invalid-email') {
+            emailErr.textContent = 'That email address looks invalid.';
+            emailErr.style.display = 'block';
+            setFieldState('email', true);
+          } else if (error.code === 'auth/weak-password') {
+            pwErr.textContent = 'Password is too weak. Try a longer one.';
+            pwErr.style.display = 'block';
+            setFieldState('password', true);
+          } else {
+            alert('Something went wrong: ' + error.message);
+          }
+          console.error(error.code, error.message);
+        });
     }
+
+    // Expose to inline onclick handlers since this is a module script
+    window.togglePw = togglePw;
+    window.checkStrength = checkStrength;
+    window.handleSignup = handleSignup;
   </script>
 
 </body>
