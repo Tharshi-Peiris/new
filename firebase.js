@@ -1,11 +1,8 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// Firebase SDK මොඩියුල ගෙන්වා ගැනීම
+import { initializeApp } from "https://gstatic.com";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://gstatic.com";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// පියවර 4 හි ලැබුණු ඔබේ Firebase Config එක මෙතනට දමන්න
 const firebaseConfig = {
   apiKey: "AIzaSyCabOf-rYYZ2eV6Bu1BApKyqYyd8nHSYYQ",
   authDomain: "sylvaracom.firebaseapp.com",
@@ -16,6 +13,31 @@ const firebaseConfig = {
   measurementId: "G-E4P55R64GL"
 };
 
-// Initialize Firebase
+
+// Firebase Initialize කිරීම
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
+// 1. SIGN UP (ලියාපදිංචි වීම) සඳහා ශ්‍රිතය
+export function handleSignUp(email, password) {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      alert("Sign Up සාර්ථකයි!");
+      console.log(userCredential.user);
+    })
+    .catch((error) => {
+      alert("දෝෂයක් ඇතිවිය: " + error.message);
+    });
+}
+
+// 2. LOGIN (ඇතුළු වීම) සඳහා ශ්‍රිතය
+export function handleLogin(email, password) {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      alert("Login සාර්ථකයි!");
+      console.log(userCredential.user);
+    })
+    .catch((error) => {
+      alert("Email හෝ Password වැරදියි: " + error.message);
+    });
+}
