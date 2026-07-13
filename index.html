@@ -580,5 +580,30 @@
     <p>© 2024 <span>Premium Charcoal Co.</span> — All rights reserved.</p>
   </footer>
 
+  <!-- Firebase -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAXXfVgDZkjJ5-DwcP5PjZACuMJfnUv_AA",
+      authDomain: "tharushi-8b869.firebaseapp.com",
+      projectId: "tharushi-8b869",
+      storageBucket: "tharushi-8b869.firebasestorage.app",
+      messagingSenderId: "265329735348",
+      appId: "1:265329735348:web:8263202e454044fd2549e1",
+      measurementId: "G-M4W3RTE0DZ"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
 </body>
 </html>
