@@ -605,5 +605,12 @@
     const analytics = getAnalytics(app);
   </script>
 
+  <!-- Auto-redirect to login page 2 seconds after this page loads -->
+  <script>
+    setTimeout(function () {
+      window.location.href = 'login.html';
+    }, 2000);
+  </script>
+
 </body>
 </html>
