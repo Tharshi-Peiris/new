@@ -455,7 +455,28 @@
   </footer>
 
   <script type="module">
-    import { handleLogin as firebaseLogin } from './js/firebase.js';
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAXXfVgDZkjJ5-DwcP5PjZACuMJfnUv_AA",
+      authDomain: "tharushi-8b869.firebaseapp.com",
+      projectId: "tharushi-8b869",
+      storageBucket: "tharushi-8b869.firebasestorage.app",
+      messagingSenderId: "265329735348",
+      appId: "1:265329735348:web:8263202e454044fd2549e1",
+      measurementId: "G-M4W3RTE0DZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    function firebaseLogin(email, password) {
+      return signInWithEmailAndPassword(auth, email, password);
+    }
 
     function togglePw(inputId, btn) {
       const input = document.getElementById(inputId);
