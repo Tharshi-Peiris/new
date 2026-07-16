@@ -605,12 +605,15 @@
     const analytics = getAnalytics(app);
   </script>
 
-  <!-- Auto-redirect to login page 2 seconds after this page loads -->
-  <script>
+  <!-- Auto-redirect to login page only on the very first visit -->
+<script>
+  if (!localStorage.getItem('hasVisitedBefore')) {
+    localStorage.setItem('hasVisitedBefore', 'true');
     setTimeout(function () {
       window.location.href = 'login.html';
     }, 2000);
-  </script>
+  }
+</script>
 
 </body>
 </html>
