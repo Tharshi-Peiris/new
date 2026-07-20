@@ -544,6 +544,9 @@
 
       firebaseLogin(email.value.trim(), pw.value)
         .then(() => {
+          // Mark the session as logged in BEFORE redirecting,
+          // so index.html's guard script lets the user through.
+          localStorage.setItem('isLoggedIn', 'true');
           window.location.href = HOME_URL;
         })
         .catch((error) => {
@@ -565,6 +568,8 @@
 
       signInWithPopup(auth, googleProvider)
         .then(() => {
+          // Same fix here — set the flag before redirecting.
+          localStorage.setItem('isLoggedIn', 'true');
           window.location.href = HOME_URL;
         })
         .catch((error) => {
