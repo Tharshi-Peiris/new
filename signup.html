@@ -299,66 +299,12 @@
     }
     .btn-google:hover { background: #f9f9f9; border-color: #bbb; }
 
+    /* RIGHT PANEL: Pure Image */
     .panel-right {
       position: relative;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 56px 48px;
-    }
-
-    .panel-right-bg {
-      position: absolute;
-      inset: 0;
       background: url('https://images.unsplash.com/photo-1600628421060-9a8fd0c7b5d3?w=900&q=80') center/cover no-repeat;
-      filter: brightness(0.3);
     }
-
-    .panel-right-content {
-      position: relative;
-      z-index: 2;
-      color: var(--white);
-    }
-
-    .panel-right-content h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 2.2rem;
-      line-height: 1.25;
-      margin-bottom: 20px;
-    }
-
-    .panel-right-content h2 span { color: var(--orange); }
-
-    .perks {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .perks li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.85);
-      line-height: 1.5;
-    }
-
-    .perk-icon {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      background: rgba(232,73,15,0.25);
-      border: 1px solid rgba(232,73,15,0.5);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .perk-icon svg { width: 18px; height: 18px; color: var(--orange); }
 
     /* ── SUCCESS MODAL ── */
     .modal-overlay {
@@ -552,47 +498,8 @@
       </div>
     </div>
 
-    <!-- RIGHT: branding panel -->
-    <div class="panel-right">
-      <div class="panel-right-bg"></div>
-      <div class="panel-right-content">
-        <h2>Join the <span>Premium</span><br/>Charcoal Family</h2>
-        <ul class="perks">
-          <li>
-            <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
-              </svg>
-            </div>
-            <div><strong>Exclusive Member Pricing</strong><br/>Save up to 20% on bulk orders and get early access to new products.</div>
-          </li>
-          <li>
-            <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-            <div><strong>Fast Order Tracking</strong><br/>Track your deliveries in real-time directly from your dashboard.</div>
-          </li>
-          <li>
-            <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/><path d="M1 1l22 22"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 5a10.9 10.9 0 0 0-1.956 2.428m1.3 6.963C6.51 18.49 9.388 20 12 20c.507 0 1-.025 1.5-.074"/>
-              </svg>
-            </div>
-            <div><strong>Priority Support</strong><br/>Dedicated customer support with faster response times for members.</div>
-          </li>
-          <li>
-            <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-            </div>
-            <div><strong>Loyalty Rewards</strong><br/>Earn points on every purchase and redeem them for free products.</div>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <!-- RIGHT: Pure image panel -->
+    <div class="panel-right"></div>
 
   </main>
 
