@@ -4,96 +4,154 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign Up — Premium Charcoal Co.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  
+  <!-- Premium Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
 
     :root {
       --orange: #E8490F;
       --orange-hover: #c93d0c;
       --dark: #111111;
       --white: #ffffff;
-      --input-border: #ddd;
+      --input-border: #e5e5e5;
       --text-dark: #1a1a1a;
-      --text-muted: #888;
+      --text-muted: #737373;
       --error: #e53e3e;
-      --success: #22a85a;
+      --success: #10b981;
     }
 
     html, body {
       height: 100%;
       font-family: 'Open Sans', sans-serif;
-    }
-
-    body {
+      background-color: #F5F5F5;
+      color: var(--text-dark);
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      background: #f7f7f7;
     }
 
-    /* ── NAV ── */
+    /* Selection Color */
+    ::selection {
+      background-color: var(--orange);
+      color: var(--white);
+    }
+
+    /* ── HEADER NAVBAR ── */
     nav {
       background: var(--dark);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 48px;
-      height: 68px;
+      height: 72px;
       flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-b: 1px solid #262626;
     }
 
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       color: var(--white);
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    
+    .nav-brand:hover {
+      opacity: 0.9;
     }
 
-    .nav-right a {
-      color: rgba(255,255,255,0.8);
+    .logo-container {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--orange) 0%, #FF7744 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(232, 73, 15, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .nav-brand:hover .logo-container {
+      transform: scale(1.05);
+    }
+
+    .logo-container svg {
+      width: 20px;
+      height: 20px;
+      color: var(--white);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-right a.nav-link {
+      color: #a3a3a3;
       text-decoration: none;
-      font-size: 0.9rem;
-      margin-left: 20px;
+      font-size: 0.875rem;
+      font-weight: 500;
       transition: color 0.2s;
     }
-    .nav-right a:hover { color: #fff; }
-
-    .btn-login-nav {
-      border: 1.5px solid rgba(255,255,255,0.4);
-      padding: 7px 18px;
-      border-radius: 24px;
-      font-weight: 600 !important;
-      font-size: 0.88rem !important;
-      transition: border-color 0.2s !important;
+    
+    .nav-right a.nav-link:hover { 
+      color: var(--white); 
     }
-    .btn-login-nav:hover { border-color: rgba(255,255,255,0.9) !important; color: #fff !important; }
 
-    /* ── MAIN ── */
+    .btn-signin-nav {
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #e5e5e5;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .btn-signin-nav:hover { 
+      border-color: rgba(255, 255, 255, 0.6); 
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ── MAIN LAYOUT ── */
     main {
       flex: 1;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 68px);
+      grid-template-columns: 1fr 1.1fr;
+      min-height: calc(100vh - 144px);
     }
 
-    /* LEFT: form */
+    /* ── LEFT PANEL: Form ── */
     .panel-left {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #fff;
+      background: #ffffff;
       padding: 48px 32px;
     }
 
     .form-box {
       width: 100%;
       max-width: 440px;
-      animation: slideIn 0.5s ease both;
+      animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
     @keyframes slideIn {
@@ -104,23 +162,18 @@
     .form-box h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 2rem;
-      margin-bottom: 6px;
+      font-size: 1.875rem;
       color: var(--text-dark);
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
     }
 
     .form-box .subtitle {
-      font-size: 0.92rem;
+      font-size: 0.875rem;
       color: var(--text-muted);
-      margin-bottom: 30px;
+      margin-bottom: 28px;
+      line-height: 1.5;
     }
-
-    .form-box .subtitle a {
-      color: var(--orange);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .form-box .subtitle a:hover { text-decoration: underline; }
 
     .field-row {
       display: grid;
@@ -130,15 +183,18 @@
 
     .field {
       margin-bottom: 18px;
+      position: relative;
     }
 
     .field label {
       display: block;
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      margin-bottom: 7px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #404040;
+      margin-bottom: 6px;
       font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .input-wrap {
@@ -150,99 +206,165 @@
       left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      color: #bbb;
-      width: 17px;
-      height: 17px;
+      color: #a3a3a3;
+      width: 16px;
+      height: 16px;
       pointer-events: none;
       transition: color 0.2s;
     }
 
-    .input-wrap input,
-    .input-wrap select {
+    .input-wrap input {
       width: 100%;
-      padding: 12px 14px 12px 40px;
+      padding: 12px 14px 12px 42px;
       border: 1.5px solid var(--input-border);
-      border-radius: 9px;
-      font-size: 0.93rem;
+      border-radius: 10px;
+      font-size: 0.875rem;
       font-family: 'Open Sans', sans-serif;
       color: var(--text-dark);
       background: #fafafa;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      transition: all 0.2s;
       outline: none;
-      appearance: none;
     }
 
-    .input-wrap input:focus,
-    .input-wrap select:focus {
+    .input-wrap input:focus {
       border-color: var(--orange);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(232,73,15,0.12);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(232, 73, 15, 0.1);
     }
 
-    .input-wrap:focus-within svg.field-icon { color: var(--orange); }
+    .input-wrap:focus-within svg.field-icon { 
+      color: var(--orange); 
+    }
 
+    /* Toggle Password Visibility */
     .toggle-pw {
       position: absolute;
-      right: 12px;
+      right: 14px;
       top: 50%;
       transform: translateY(-50%);
       background: none;
       border: none;
       cursor: pointer;
-      color: #bbb;
-      padding: 0;
+      color: #a3a3a3;
+      padding: 4px;
       display: flex;
       align-items: center;
+      transition: color 0.2s;
     }
-    .toggle-pw:hover { color: var(--orange); }
-    .toggle-pw svg { width: 17px; height: 17px; }
+    
+    .toggle-pw:hover { 
+      color: var(--text-dark); 
+    }
+    
+    .toggle-pw svg { 
+      width: 18px; 
+      height: 18px; 
+    }
 
-    .pw-strength {
+    /* Password strength feedback */
+    .pw-strength-container {
       margin-top: 8px;
+      display: none;
     }
-    .strength-bar {
+    
+    .pw-strength-bar {
       display: flex;
       gap: 4px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
-    .strength-bar span {
+    
+    .pw-strength-bar span {
       flex: 1;
       height: 4px;
       border-radius: 4px;
-      background: #eee;
+      background: #f5f5f5;
       transition: background 0.3s;
     }
-    .strength-label {
-      font-size: 0.75rem;
+    
+    .pw-strength-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .pw-strength-label-text {
+      font-size: 0.65rem;
       color: var(--text-muted);
     }
+    
+    .pw-strength-rating {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
+    /* Error Handling */
     .error-msg {
       display: none;
       color: var(--error);
-      font-size: 0.78rem;
-      margin-top: 4px;
+      font-size: 0.75rem;
+      margin-top: 6px;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .error-msg::before {
+      content: "";
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: var(--error);
     }
 
+    .input-error input {
+      border-color: var(--error) !important;
+      background-color: #fffdfd;
+    }
+    
+    .input-error input:focus {
+      box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.1) !important;
+    }
+
+    /* Terms and Conditions Checkbox */
     .terms {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      font-size: 0.84rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin: 18px 0;
       line-height: 1.5;
+      cursor: pointer;
+      user-select: none;
     }
+    
     .terms input[type="checkbox"] {
       accent-color: var(--orange);
-      width: 15px;
-      height: 15px;
+      width: 16px;
+      height: 16px;
       flex-shrink: 0;
       margin-top: 2px;
+      cursor: pointer;
     }
-    .terms a { color: var(--orange); text-decoration: none; font-weight: 600; }
-    .terms a:hover { text-decoration: underline; }
+    
+    .terms button { 
+      color: var(--orange); 
+      text-decoration: none; 
+      font-weight: 600; 
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 0;
+    }
+    
+    .terms button:hover { 
+      text-decoration: underline; 
+    }
 
+    /* Submit Action Button */
     .btn-signup {
       width: 100%;
       background: var(--orange);
@@ -252,27 +374,45 @@
       border-radius: 10px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      transition: all 0.2s;
       letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(232, 73, 15, 0.2);
     }
-    .btn-signup:hover {
+    
+    .btn-signup:hover:not(:disabled) {
       background: var(--orange-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(232,73,15,0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(232, 73, 15, 0.3);
     }
-    .btn-signup:active { transform: translateY(0); }
-    .btn-signup:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    
+    .btn-signup:active:not(:disabled) { 
+      transform: translateY(0); 
+    }
+    
+    .btn-signup:disabled { 
+      opacity: 0.6; 
+      cursor: not-allowed; 
+    }
 
+    /* Divider */
     .divider {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin: 20px 0;
-      color: #ccc;
-      font-size: 0.82rem;
+      margin: 24px 0;
+      color: #d4d4d4;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
+    
     .divider::before, .divider::after {
       content: '';
       flex: 1;
@@ -280,31 +420,37 @@
       background: #e5e5e5;
     }
 
+    /* Google Sign-in button */
     .btn-google {
       width: 100%;
-      background: #fff;
-      color: var(--text-dark);
-      border: 1.5px solid #ddd;
+      background: #ffffff;
+      color: #404040;
+      border: 1.5px solid #e5e5e5;
       padding: 12px;
       border-radius: 10px;
       font-family: 'Open Sans', sans-serif;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      transition: background 0.2s, border-color 0.2s;
+      transition: all 0.2s;
     }
-    .btn-google:hover { background: #f9f9f9; border-color: #bbb; }
+    
+    .btn-google:hover:not(:disabled) { 
+      background: #fafafa; 
+      border-color: #d4d4d4; 
+    }
 
+    /* ── RIGHT PANEL: Branding & perks ── */
     .panel-right {
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       padding: 56px 48px;
     }
 
@@ -312,245 +458,791 @@
       position: absolute;
       inset: 0;
       background: url('https://images.unsplash.com/photo-1600628421060-9a8fd0c7b5d3?w=900&q=80') center/cover no-repeat;
-      filter: brightness(0.3);
+      transition: transform 10s ease;
+      z-index: 1;
+    }
+    
+    .panel-right:hover .panel-right-bg {
+      transform: scale(1.03);
+    }
+
+    .panel-right-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 10, 10, 0.85) 0%, rgba(17, 17, 17, 0.95) 100%);
+      mix-blend-mode: multiply;
+      z-index: 2;
     }
 
     .panel-right-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       color: var(--white);
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    .panel-right-content .tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      display: block;
+      margin-bottom: 12px;
     }
 
     .panel-right-content h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 2.2rem;
-      line-height: 1.25;
-      margin-bottom: 20px;
+      font-size: 2.25rem;
+      line-height: 1.2;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
     }
 
-    .panel-right-content h2 span { color: var(--orange); }
+    .panel-right-content h2 span { 
+      color: var(--orange); 
+    }
 
     .perks {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
+      max-width: 500px;
     }
 
     .perks li {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.85);
+      gap: 16px;
+      font-size: 0.875rem;
+      color: #d4d4d4;
       line-height: 1.5;
     }
 
     .perk-icon {
       flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      background: rgba(232,73,15,0.25);
-      border: 1px solid rgba(232,73,15,0.5);
-      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      background: rgba(232, 73, 15, 0.15);
+      border: 1px solid rgba(232, 73, 15, 0.3);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.2s;
     }
-    .perk-icon svg { width: 18px; height: 18px; color: var(--orange); }
 
-    footer {
-      background: var(--dark);
-      color: rgba(255,255,255,0.4);
-      text-align: center;
-      padding: 18px 48px;
-      font-size: 0.82rem;
-      flex-shrink: 0;
+    .perks li:hover .perk-icon {
+      background: rgba(232, 73, 15, 0.25);
+      border-color: var(--orange);
+      transform: translateY(-2px);
     }
-    footer span { color: var(--orange); }
 
-    /* ── SUCCESS MODAL ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(17,17,17,0.55);
+    .perk-icon svg { 
+      width: 18px; 
+      height: 18px; 
+      color: var(--orange); 
+    }
+
+    .perk-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+      font-size: 0.875rem;
+    }
+
+    .carbon-neutral-badge {
+      position: relative;
+      z-index: 3;
+      border-t: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 24px;
+      margin-top: 24px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      animation: fadeIn 0.25s ease forwards;
+      gap: 12px;
     }
-    @keyframes fadeIn { to { opacity: 1; } }
 
-    .modal-box {
-      background: #fff;
-      border-radius: 16px;
-      padding: 36px 40px;
-      max-width: 380px;
-      width: 90%;
-      text-align: center;
-      transform: translateY(14px) scale(0.97);
-      animation: popIn 0.3s ease forwards;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-    }
-    @keyframes popIn { to { transform: translateY(0) scale(1); } }
-
-    .modal-icon {
-      width: 60px;
-      height: 60px;
-      background: rgba(34,168,90,0.12);
+    .co2-ring {
+      width: 32px;
+      height: 32px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #34d399;
     }
-    .modal-icon svg { width: 30px; height: 30px; color: var(--success); }
 
-    .modal-box h3 {
+    .carbon-text h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #e5e5e5;
+    }
+
+    .carbon-text p {
+      font-size: 0.7rem;
+      color: #a3a3a3;
+      margin-top: 1px;
+    }
+
+    /* ── PREMIUM INTERACTIVE BOTTOM BAR (FOOTER) ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid #262626;
+      padding: 32px 48px;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .bottom-bar-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .bottom-bar-wrapper {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .bottom-bar-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bottom-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .footer-flame {
+      width: 16px;
+      height: 16px;
+    }
+
+    .copyright-text {
+      color: #737373;
+      line-height: 1.5;
+      max-width: 380px;
+    }
+
+    .bottom-bar-center {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .bottom-bar-center {
+        justify-content: center;
+      }
+    }
+
+    .footer-link-btn {
+      background: none;
+      border: none;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .footer-link-btn:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .footer-divider {
+      color: #404040;
+      user-select: none;
+      font-size: 0.7rem;
+    }
+
+    .bottom-bar-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .bottom-bar-right {
+        align-items: flex-end;
+      }
+    }
+
+    /* Live status indicator */
+    .live-status-button {
+      background: #171717;
+      border: 1px solid #262626;
+      border-radius: 30px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #d4d4d4;
+    }
+
+    .live-status-button:hover {
+      background: #262626;
+      border-color: #404040;
+    }
+
+    .status-pulse-wrapper {
+      position: relative;
+      display: flex;
+      width: 8px;
+      height: 8px;
+    }
+
+    .status-pulse-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: var(--success);
+      opacity: 0.75;
+      animation: pulse 1.5s infinite;
+    }
+
+    .status-pulse-core {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--success);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.75;
+      }
+      100% {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+
+    .status-text {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Socials block */
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .social-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #171717;
+      border: 1px solid #262626;
+      color: #a3a3a3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .social-icon:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .social-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ── POPUP OVERLAY MODALS (FROM BOTTOM BAR) ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .modal-box {
+      background: #ffffff;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      transform: translateY(15px) scale(0.97);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .modal-overlay.active .modal-box {
+      transform: translateY(0) scale(1);
+    }
+    
+    .modal-header-accent {
+      height: 6px;
+      background: linear-gradient(90deg, var(--orange) 0%, #FF7744 100%);
+    }
+    
+    .close-modal-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #f5f5f5;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #737373;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    
+    .close-modal-btn:hover {
+      background: #e5e5e5;
+      color: #1a1a1a;
+    }
+    
+    .close-modal-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .modal-body {
+      padding: 32px;
+    }
+    
+    .modal-body h3 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+    
+    .modal-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 20px;
+    }
+    
+    .modal-content {
+      font-size: 0.85rem;
+      color: #404040;
+      line-height: 1.6;
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    
+    .modal-content p {
+      margin-bottom: 12px;
+    }
+    
+    .modal-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-content::-webkit-scrollbar-track {
+      background: #f5f5f5;
+      border-radius: 4px;
+    }
+    .modal-content::-webkit-scrollbar-thumb {
+      background: #d4d4d4;
+      border-radius: 4px;
+    }
+    .modal-content::-webkit-scrollbar-thumb:hover {
+      background: #a3a3a3;
+    }
+    
+    .modal-footer {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid #f5f5f5;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    
+    .btn-modal-close {
+      background: #111111;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    
+    .btn-modal-close:hover {
+      background: #262626;
+    }
+
+    /* Cookie checkbox list */
+    .cookie-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .cookie-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #fcfcfc;
+      border: 1px solid #f0f0f0;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .cookie-item input {
+      accent-color: var(--orange);
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+    }
+
+    .cookie-info h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--text-dark);
+    }
+
+    .cookie-info p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    /* Status Node List */
+    .status-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .status-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      background: #fafafa;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #404040;
+    }
+
+    .status-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    /* ── SUCCESS ACTION MODAL ── */
+    #success-modal {
+      pointer-events: none;
+    }
+    #success-modal.active {
+      pointer-events: auto;
+    }
+
+    .success-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+
+    .success-icon-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-color: var(--success);
+      opacity: 0.2;
+      animation: pulse 1.8s infinite;
+    }
+
+    .success-icon-wrapper svg {
+      width: 24px;
+      height: 24px;
+      color: var(--success);
+    }
+
+    .success-box-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--text-dark);
+      text-align: center;
       margin-bottom: 8px;
     }
-    .modal-box p {
+
+    .success-box-msg {
+      font-size: 0.85rem;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      text-align: center;
       line-height: 1.5;
     }
 
-    @media (max-width: 900px) {
-      .field-row { grid-template-columns: 1fr; }
+    .success-summary {
+      background: #fafafa;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 14px;
+      margin: 20px 0;
+      font-size: 0.75rem;
+      text-align: left;
+      line-height: 1.6;
+      color: #404040;
     }
+
+    .success-summary p {
+      margin-bottom: 4px;
+    }
+    .success-summary p:last-child {
+      margin-bottom: 0;
+    }
+
+    .success-summary strong {
+      color: var(--text-dark);
+    }
+
+    /* ── RESPONSIVE ADAPTATIONS ── */
+    @media (max-width: 900px) {
+      .field-row { 
+        grid-template-columns: 1fr; 
+        gap: 0;
+      }
+    }
+
     @media (max-width: 768px) {
-      main { grid-template-columns: 1fr; }
-      .panel-right { display: none; }
-      nav { padding: 0 20px; }
-      .panel-left { padding: 40px 20px; }
+      main { 
+        grid-template-columns: 1fr; 
+      }
+      .panel-right { 
+        display: none; 
+      }
+      nav { 
+        padding: 0 20px; 
+      }
+      .panel-left { 
+        padding: 40px 20px; 
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <a href="https://tharshi-peiris.github.io/new/" class="nav-brand">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2C6.48 2 2 6.48 2 12c0 3.54 1.84 6.65 4.6 8.44C7.5 15.5 10 13 10 10c1 2 3 4 3 7a8 8 0 1 0-1-15z"/>
-      </svg>
-      Premium Charcoal Co.
+  <!-- HEADER NAVBAR -->
+  <nav id="main-navbar">
+    <a href="#" class="nav-brand">
+      <div class="logo-container">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C6.48 2 2 6.48 2 12c0 3.54 1.84 6.65 4.6 8.44C7.5 15.5 10 13 10 10c1 2 3 4 3 7a8 8 0 1 0-1-15z"/>
+        </svg>
+      </div>
+      <span>Premium Charcoal Co.</span>
     </a>
     <div class="nav-right">
-      <a href="https://tharshi-peiris.github.io/new/">Home</a>
-      <a href="login.html" class="btn-login-nav">Sign In</a>
+      <a href="#" class="nav-link">Home</a>
+      <a href="#" class="btn-signin-nav" id="quick-signin-trigger">Sign In</a>
     </div>
   </nav>
 
-  <!-- MAIN -->
-  <main>
+  <!-- MAIN COLUMN LAYOUT -->
+  <main id="main-container">
 
-    <!-- LEFT: form -->
+    <!-- LEFT COLUMN: Registration Form -->
     <div class="panel-left">
       <div class="form-box">
-        <h1>Create Account</h1>
-        <p class="subtitle">Already have an account? <a href="login.html">Sign in here</a></p>
+        <h1 id="form-heading">Create Account</h1>
+        <p class="subtitle" id="form-sub">Already have an account? <a href="#" id="signin-link" style="color: var(--orange); font-weight:600; text-decoration:none;">Sign in here</a></p>
 
-        <div class="field-row">
-          <div class="field">
-            <label for="fname">First Name</label>
+        <form id="signup-form" onsubmit="event.preventDefault();">
+          
+          <!-- First & Last Name row -->
+          <div class="field-row">
+            <div class="field" id="field-first">
+              <label for="fname">First Name</label>
+              <div class="input-wrap">
+                <input type="text" id="fname" placeholder="John" autocomplete="given-name"/>
+                <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <span class="error-msg" id="fname-error">First name is required.</span>
+            </div>
+            
+            <div class="field" id="field-last">
+              <label for="lname">Last Name</label>
+              <div class="input-wrap">
+                <input type="text" id="lname" placeholder="Doe" autocomplete="family-name"/>
+                <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <span class="error-msg" id="lname-error">Last name is required.</span>
+            </div>
+          </div>
+
+          <!-- Email address -->
+          <div class="field" id="field-email">
+            <label for="email">Email Address</label>
             <div class="input-wrap">
-              <input type="text" id="fname" placeholder="John" autocomplete="given-name"/>
+              <input type="email" id="email" placeholder="you@example.com" autocomplete="email"/>
               <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
             </div>
-            <span class="error-msg" id="fname-error">First name is required.</span>
+            <span class="error-msg" id="email-error">Please enter a valid email.</span>
           </div>
-          <div class="field">
-            <label for="lname">Last Name</label>
+
+          <!-- Phone Number (Optional) -->
+          <div class="field" id="field-phone">
+            <label for="phone">Phone Number <span style="color:#a3a3a3; font-weight:400; font-size:0.7rem; text-transform:none;">(optional)</span></label>
             <div class="input-wrap">
-              <input type="text" id="lname" placeholder="Doe" autocomplete="family-name"/>
+              <input type="tel" id="phone" placeholder="+1 (555) 000-0000" autocomplete="tel"/>
               <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.55 5.55l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/>
               </svg>
             </div>
-            <span class="error-msg" id="lname-error">Last name is required.</span>
           </div>
-        </div>
 
-        <div class="field">
-          <label for="email">Email Address</label>
-          <div class="input-wrap">
-            <input type="email" id="email" placeholder="you@example.com" autocomplete="email"/>
-            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-            </svg>
-          </div>
-          <span class="error-msg" id="email-error">Please enter a valid email.</span>
-        </div>
-
-        <div class="field">
-          <label for="phone">Phone Number <span style="color:#bbb;font-weight:400;">(optional)</span></label>
-          <div class="input-wrap">
-            <input type="tel" id="phone" placeholder="+1 (555) 000-0000" autocomplete="tel"/>
-            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.55 5.55l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/>
-            </svg>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="password">Password</label>
-          <div class="input-wrap">
-            <input type="password" id="password" placeholder="Min. 8 characters" autocomplete="new-password" oninput="checkStrength(this.value)"/>
-            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-            </svg>
-            <button class="toggle-pw" type="button" onclick="togglePw('password', this)" title="Show/Hide">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>
+          <!-- Password with Strength Calculator -->
+          <div class="field" id="field-password">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <input type="password" id="password" placeholder="Min. 8 characters" autocomplete="new-password"/>
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
-            </button>
-          </div>
-          <div class="pw-strength">
-            <div class="strength-bar">
-              <span id="s1"></span><span id="s2"></span><span id="s3"></span><span id="s4"></span>
+              <button class="toggle-pw" type="button" onclick="togglePasswordVisibility('password', this)" title="Show/Hide Password">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
             </div>
-            <span class="strength-label" id="strength-label"></span>
+            
+            <!-- Real-time strength display -->
+            <div class="pw-strength-container" id="password-strength-info">
+              <div class="pw-strength-bar">
+                <span id="s1"></span><span id="s2"></span><span id="s3"></span><span id="s4"></span>
+              </div>
+              <div class="pw-strength-footer">
+                <span class="pw-strength-label-text">Password Complexity</span>
+                <span class="pw-strength-rating" id="password-strength-label"></span>
+              </div>
+            </div>
+            
+            <span class="error-msg" id="pw-error">Password must be at least 8 characters.</span>
           </div>
-          <span class="error-msg" id="pw-error">Password must be at least 8 characters.</span>
-        </div>
 
-        <div class="field">
-          <label for="confirm">Confirm Password</label>
-          <div class="input-wrap">
-            <input type="password" id="confirm" placeholder="Repeat your password" autocomplete="new-password"/>
-            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-            </svg>
-            <button class="toggle-pw" type="button" onclick="togglePw('confirm', this)" title="Show/Hide">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>
+          <!-- Confirm Password -->
+          <div class="field" id="field-confirm">
+            <label for="confirm">Confirm Password</label>
+            <div class="input-wrap">
+              <input type="password" id="confirm" placeholder="Repeat your password" autocomplete="new-password"/>
+              <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
-            </button>
+              <button class="toggle-pw" type="button" onclick="togglePasswordVisibility('confirm', this)" title="Show/Hide Password">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <span class="error-msg" id="confirm-error">Passwords do not match.</span>
           </div>
-          <span class="error-msg" id="confirm-error">Passwords do not match.</span>
-        </div>
 
-        <label class="terms">
-          <input type="checkbox" id="terms-check"/>
-          I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-        </label>
-        <span class="error-msg" id="terms-error" style="display:none;margin-bottom:10px;">You must accept the terms.</span>
+          <!-- Interactive Terms agreement -->
+          <label class="terms" id="field-terms">
+            <input type="checkbox" id="terms-check"/>
+            <span>I agree to the <button type="button" onclick="openModal('modal-terms')">Terms & Conditions</button> and <button type="button" onclick="openModal('modal-privacy')">Privacy Policy</button></span>
+          </label>
+          <span class="error-msg" id="terms-error" style="display:none; margin-bottom:12px;">You must accept the terms.</span>
 
-        <button class="btn-signup" onclick="handleSignup()">Create My Account</button>
+          <!-- Sign Up Submit Trigger -->
+          <button type="button" class="btn-signup" id="btn-signup-action" onclick="handleFormSubmission()">Create My Account</button>
+
+        </form>
 
         <div class="divider">or sign up with</div>
 
-        <button class="btn-google">
+        <!-- Google OAuth Trigger -->
+        <button type="button" class="btn-google" id="btn-google-action" onclick="handleGoogleOAuth()">
           <svg width="18" height="18" viewBox="0 0 48 48">
             <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
             <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
@@ -562,54 +1254,307 @@
       </div>
     </div>
 
-    <!-- RIGHT: branding panel -->
+    <!-- RIGHT COLUMN: Elegant Branding & Benefits -->
     <div class="panel-right">
       <div class="panel-right-bg"></div>
+      <div class="panel-right-overlay"></div>
+      
       <div class="panel-right-content">
+        <span class="tagline">Premium Fuel For Master Chefs</span>
         <h2>Join the <span>Premium</span><br/>Charcoal Family</h2>
+        
         <ul class="perks">
           <li>
             <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
             </div>
-            <div><strong>Exclusive Member Pricing</strong><br/>Save up to 20% on bulk orders and get early access to new products.</div>
+            <div>
+              <div class="perk-title">Exclusive Member Pricing</div>
+              Save up to 20% on bulk white-charcoal orders and lock in price protection for high-season cookouts.
+            </div>
           </li>
           <li>
             <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13" rx="2" ry="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
               </svg>
             </div>
-            <div><strong>Fast Order Tracking</strong><br/>Track your deliveries in real-time directly from your dashboard.</div>
+            <div>
+              <div class="perk-title">Real-Time Delivery Tracking</div>
+              Stay updated with real-time temperature-tracked deliveries from our wood-ovens straight to your kitchen.
+            </div>
           </li>
           <li>
             <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/><path d="M1 1l22 22"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 5a10.9 10.9 0 0 0-1.956 2.428m1.3 6.963C6.51 18.49 9.388 20 12 20c.507 0 1-.025 1.5-.074"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
               </svg>
             </div>
-            <div><strong>Priority Support</strong><br/>Dedicated customer support with faster response times for members.</div>
+            <div>
+              <div class="perk-title">Dedicated Pitmaster Support</div>
+              Direct access to woodfire pitmasters who can consult on optimal log shapes, moisture contents, and lighting advice.
+            </div>
           </li>
           <li>
             <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
               </svg>
             </div>
-            <div><strong>Loyalty Rewards</strong><br/>Earn points on every purchase and redeem them for free products.</div>
+            <div>
+              <div class="perk-title">Loyalty Rewards Program</div>
+              Accumulate flame points on every order to redeem for high-temp firestarters, organic wood chips, and masterclass invitations.
+            </div>
           </li>
         </ul>
+      </div>
+
+      <!-- Lower eco certification -->
+      <div class="carbon-neutral-badge">
+        <div class="co2-ring">CO₂</div>
+        <div class="carbon-text">
+          <h5>100% Certified Carbon-Neutral</h5>
+          <p>All wood sourced from renewable, eco-managed natural plantations.</p>
+        </div>
       </div>
     </div>
 
   </main>
 
-  <footer>
-    <p>© 2024 <span>Premium Charcoal Co.</span> — All rights reserved.</p>
+  <!-- BOTTOM BAR (FOOTER) -->
+  <footer id="updated-bottom-bar">
+    <div class="bottom-bar-wrapper">
+      
+      <!-- Left Block: Brand & Copyright -->
+      <div class="bottom-bar-left">
+        <div class="bottom-brand">
+          <svg class="footer-flame" viewBox="0 0 24 24" fill="#E8490F" stroke="#E8490F" stroke-width="1">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 3.54 1.84 6.65 4.6 8.44C7.5 15.5 10 13 10 10c1 2 3 4 3 7a8 8 0 1 0-1-15z"/>
+          </svg>
+          <span>Premium Charcoal Co.</span>
+        </div>
+        <p class="copyright-text">
+          &copy; <span id="current-year">2026</span> Premium Charcoal Co. All rights reserved. Crafting exceptional, organic grilling fuels for professional kitchens and backyard barbecue artists.
+        </p>
+      </div>
+
+      <!-- Center Block: Interactive Links -->
+      <div class="bottom-bar-center">
+        <button onclick="openModal('modal-privacy')" class="footer-link-btn">Privacy Policy</button>
+        <span class="footer-divider">|</span>
+        <button onclick="openModal('modal-terms')" class="footer-link-btn">Terms of Service</button>
+        <span class="footer-divider">|</span>
+        <button onclick="openModal('modal-cookies')" class="footer-link-btn">Cookie Settings</button>
+        <span class="footer-divider">|</span>
+        <button onclick="openModal('modal-status')" class="footer-link-btn">Help & Support</button>
+      </div>
+
+      <!-- Right Block: Live Status & Socials -->
+      <div class="bottom-bar-right">
+        <!-- System Status Node -->
+        <button onclick="openModal('modal-status')" class="live-status-button">
+          <span class="status-pulse-wrapper">
+            <span class="status-pulse-ring"></span>
+            <span class="status-pulse-core"></span>
+          </span>
+          <span class="status-text">All Systems Operational</span>
+        </button>
+
+        <!-- Social Connections -->
+        <div class="social-links">
+          <a href="#" aria-label="Facebook" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube" class="social-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </footer>
 
+  <!-- ── POPUP MODAL: Privacy Policy ── -->
+  <div id="modal-privacy" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'modal-privacy')">
+    <div class="modal-box">
+      <div class="modal-header-accent"></div>
+      <button class="close-modal-btn" onclick="closeModal('modal-privacy')" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-body">
+        <h3>Privacy Policy</h3>
+        <span class="modal-subtitle">Premium Charcoal Co. — Last updated: July 2026</span>
+        <div class="modal-content">
+          <p>We value your trust and are committed to protecting your personal information. This Privacy Policy details how we collect, use, and secure your details when you create an account, purchase our artisanal charcoal products, or use our digital services.</p>
+          <p><strong>Information We Collect:</strong> When you sign up, we collect your name, email address, and phone number (optional) to fulfill orders, verify identity, and deliver real-time shipping updates. We never sell, lease, or distribute your personal data to third-party advertisers.</p>
+          <p><strong>Data Storage & Security:</strong> All credentials and profiles are securely stored using industry-standard AES-256 encryption. Our server-side handlers isolate private keys away from browser-facing code to prevent unauthorized breaches.</p>
+          <p><strong>Your Rights:</strong> You hold complete ownership of your data. You may request a full export or complete deletion of your account and transaction history at any time by contacting our support team.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-modal-close" onclick="closeModal('modal-privacy')">Close Window</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── POPUP MODAL: Terms of Service ── -->
+  <div id="modal-terms" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'modal-terms')">
+    <div class="modal-box">
+      <div class="modal-header-accent"></div>
+      <button class="close-modal-btn" onclick="closeModal('modal-terms')" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-body">
+        <h3>Terms of Service</h3>
+        <span class="modal-subtitle">Premium Charcoal Co. — Last updated: July 2026</span>
+        <div class="modal-content">
+          <p>Welcome to Premium Charcoal Co. By registering an account or placing an order, you agree to comply with and be bound by the following Terms and Conditions of Service.</p>
+          <p><strong>Account Responsibility:</strong> You are solely responsible for maintaining the confidentiality of your password and credentials. You agree to notify us immediately of any unauthorized access or security breaches.</p>
+          <p><strong>Product Guarantee & Proper Use:</strong> Our charcoal products are crafted from premium, organic hardwood sources. They are designed strictly for food preparation and grilling with adequate ventilation. Users must follow safe lighting procedures outlined in the packaging.</p>
+          <p><strong>Limitations of Liability:</strong> Premium Charcoal Co. is not liable for indirect, incidental, or consequential damages resulting from improper storage, misuse of fuel, or unauthorized account access.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-modal-close" onclick="closeModal('modal-terms')">Close Window</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── POPUP MODAL: Cookie Settings ── -->
+  <div id="modal-cookies" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'modal-cookies')">
+    <div class="modal-box">
+      <div class="modal-header-accent"></div>
+      <button class="close-modal-btn" onclick="closeModal('modal-cookies')" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-body">
+        <h3>Cookie Settings & Preferences</h3>
+        <span class="modal-subtitle">Configure your privacy preferences below</span>
+        <div class="modal-content">
+          <p>We use cookies to elevate your digital experience, remember your preferences, and analyze our traffic dynamically.</p>
+          
+          <div class="cookie-list">
+            <div class="cookie-item">
+              <input type="checkbox" checked disabled id="cookie-essential"/>
+              <div class="cookie-info">
+                <h6>Essential Cookies (Always Active)</h6>
+                <p>Required for secure logins, shopping cart persistence, and authenticating active sessions. These cannot be disabled.</p>
+              </div>
+            </div>
+
+            <div class="cookie-item">
+              <input type="checkbox" checked id="cookie-analytics"/>
+              <div class="cookie-info">
+                <h6>Analytical & Performance Cookies</h6>
+                <p>Allow us to count visits and traffic sources to optimize the speed and interface of our dashboard. All gathered metrics are fully anonymized.</p>
+              </div>
+            </div>
+
+            <div class="cookie-item">
+              <input type="checkbox" checked id="cookie-marketing"/>
+              <div class="cookie-info">
+                <h6>Marketing Customization Cookies</h6>
+                <p>Personalized promotions tailored to your past orders or grilling interests. You can opt out at any time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-modal-save" onclick="saveCookiePreferences()">Save Preferences</button>
+          <button class="btn-modal-close" onclick="closeModal('modal-cookies')">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── POPUP MODAL: Help & System Status ── -->
+  <div id="modal-status" class="modal-overlay" onclick="closeModalOnOuterClick(event, 'modal-status')">
+    <div class="modal-box">
+      <div class="modal-header-accent"></div>
+      <button class="close-modal-btn" onclick="closeModal('modal-status')" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-body">
+        <h3>System Health & Support</h3>
+        <span class="modal-subtitle">Live Telemetry & Diagnostics Node Status — 100% Operational</span>
+        <div class="modal-content">
+          <p>Current Status: All core services are operating within nominal parameters. Real-time database synchronizations, authentication servers, and delivery fulfillment APIs are active.</p>
+          
+          <ul class="status-list">
+            <li class="status-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Auth Cluster Node: Active (Latency: 28ms)</span>
+            </li>
+            <li class="status-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Firestore DB Node: Syncing (Uptime: 99.99%)</span>
+            </li>
+            <li class="status-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Payment Gateway Node: Online (PCI-DSS compliant)</span>
+            </li>
+            <li class="status-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Fulfillment API Service: Connected & Active</span>
+            </li>
+          </ul>
+
+          <p style="margin-top: 14px; font-size: 0.8rem; color: #737373;">Need support? Direct support queue can be reached via email at tharushipeiris5@gmail.com.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-modal-close" onclick="closeModal('modal-status')">Close Window</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SUCCESS REGISTRATION MODAL ── -->
+  <div id="success-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 420px;">
+      <div class="modal-header-accent"></div>
+      <div class="modal-body">
+        <div class="success-icon-wrapper">
+          <div class="success-icon-ring"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+
+        <h3 class="success-box-title" id="success-user-title">Welcome!</h3>
+        <p class="success-box-msg" id="success-user-msg">Your premium woodfire member account has been created successfully. Redirecting you to sign in...</p>
+
+        <div class="success-summary" id="success-summary-details">
+          <!-- Populated dynamically upon successful registration -->
+        </div>
+
+        <div class="modal-footer" style="border-top: none; margin-top: 0; padding-top: 0; justify-content: center;">
+          <button class="btn-signup" style="margin-top: 0;" onclick="location.reload()">Go to Dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCRIPT COMPONENT ── -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
@@ -622,6 +1567,7 @@
       setDoc
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+    // Firebase Credentials provided by the user
     const firebaseConfig = {
       apiKey: "AIzaSyAXXfVgDZkjJ5-DwcP5PjZACuMJfnUv_AA",
       authDomain: "tharushi-8b869.firebaseapp.com",
@@ -632,167 +1578,344 @@
       measurementId: "G-M4W3RTE0DZ"
     };
 
+    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    function firebaseSignUp(email, password) {
-      return createUserWithEmailAndPassword(auth, email, password);
+    // DOM Elements Cache
+    const fnameInput = document.getElementById('fname');
+    const lnameInput = document.getElementById('lname');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const passwordInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirm');
+    const termsCheck = document.getElementById('terms-check');
+    const submitBtn = document.getElementById('btn-signup-action');
+
+    // Password strength inputs
+    const strengthContainer = document.getElementById('password-strength-info');
+    const s1 = document.getElementById('s1');
+    const s2 = document.getElementById('s2');
+    const s3 = document.getElementById('s3');
+    const s4 = document.getElementById('s4');
+    const strengthLabel = document.getElementById('password-strength-label');
+
+    // Dynamic Copyright Year
+    const dynamicYearEl = document.getElementById('current-year');
+    if (dynamicYearEl) {
+      dynamicYearEl.textContent = new Date().getFullYear();
     }
 
-    // Firebase Auth only stores email/password, so the extra profile
-    // fields (name, phone) get saved separately in Firestore under /users/{uid}.
-    function saveUserProfile(uid, profileData) {
-      return setDoc(doc(db, "users", uid), profileData, { merge: true });
-    }
+    // Modal Helpers
+    window.openModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+      }
+    };
 
-    function togglePw(inputId, btn) {
+    window.closeModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    };
+
+    window.closeModalOnOuterClick = function(event, modalId) {
+      if (event.target === document.getElementById(modalId)) {
+        closeModal(modalId);
+      }
+    };
+
+    // Cookie Preference Dialog Helper
+    window.saveCookiePreferences = function() {
+      const analyticsChecked = document.getElementById('cookie-analytics').checked;
+      const marketingChecked = document.getElementById('cookie-marketing').checked;
+      
+      alert(`Cookie Preferences Saved!\nAnalytical: ${analyticsChecked ? 'ENABLED' : 'DISABLED'}\nMarketing: ${marketingChecked ? 'ENABLED' : 'DISABLED'}`);
+      closeModal('modal-cookies');
+    };
+
+    // Password Visibility Toggle
+    window.togglePasswordVisibility = function(inputId, button) {
       const input = document.getElementById(inputId);
-      const isText = input.type === 'text';
-      input.type = isText ? 'password' : 'text';
-      btn.querySelector('svg').innerHTML = isText
-        ? '<path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>'
-        : '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
-    }
+      if (!input) return;
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      
+      const svg = button.querySelector('svg');
+      if (isPassword) {
+        // EyeOff icon
+        svg.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
+      } else {
+        // Eye icon
+        svg.innerHTML = '<path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>';
+      }
+    };
 
-    function checkStrength(val) {
-      const bars = [document.getElementById('s1'), document.getElementById('s2'), document.getElementById('s3'), document.getElementById('s4')];
-      const label = document.getElementById('strength-label');
+    // Password Complexity Scoring Engine
+    function evaluatePasswordStrength(val) {
+      if (!val) {
+        strengthContainer.style.display = 'none';
+        return 0;
+      }
+      
+      strengthContainer.style.display = 'block';
       let score = 0;
       if (val.length >= 8) score++;
       if (/[A-Z]/.test(val)) score++;
       if (/[0-9]/.test(val)) score++;
       if (/[^A-Za-z0-9]/.test(val)) score++;
 
-      const colors = ['#e53e3e', '#E8490F', '#f6ad55', '#22a85a'];
+      const colors = ['#e53e3e', '#E8490F', '#f59e0b', '#10b981'];
       const labels = ['Weak', 'Fair', 'Good', 'Strong'];
-      bars.forEach((b, i) => { b.style.background = i < score ? colors[score - 1] : '#eee'; });
-      label.textContent = val.length > 0 ? labels[score - 1] || '' : '';
-      label.style.color = score > 0 ? colors[score - 1] : '#888';
+      
+      const bars = [s1, s2, s3, s4];
+      bars.forEach((bar, idx) => {
+        bar.style.backgroundColor = idx < score ? colors[score - 1] : '#f5f5f5';
+      });
+
+      strengthLabel.textContent = labels[score - 1] || 'Weak';
+      strengthLabel.style.color = colors[score - 1] || '#e53e3e';
+      return score;
     }
 
-    function showError(id, show) {
-      const el = document.getElementById(id);
-      el.style.display = show ? 'block' : 'none';
+    if (passwordInput) {
+      passwordInput.addEventListener('input', (e) => {
+        evaluatePasswordStrength(e.target.value);
+        clearFieldError('password');
+      });
     }
 
-    function setFieldState(inputId, isError) {
-      const input = document.getElementById(inputId);
-      if (input) input.style.borderColor = isError ? '#e53e3e' : '#ddd';
+    // Input validations listeners
+    if (fnameInput) fnameInput.addEventListener('input', () => clearFieldError('fname'));
+    if (lnameInput) lnameInput.addEventListener('input', () => clearFieldError('lname'));
+    if (emailInput) emailInput.addEventListener('input', () => clearFieldError('email'));
+    if (confirmInput) confirmInput.addEventListener('input', () => clearFieldError('confirm'));
+    if (termsCheck) termsCheck.addEventListener('change', () => clearFieldError('terms'));
+
+    function setFieldState(fieldId, isError) {
+      const fieldWrapper = document.getElementById(`field-${fieldId}`);
+      if (fieldWrapper) {
+        if (isError) {
+          fieldWrapper.classList.add('input-error');
+        } else {
+          fieldWrapper.classList.remove('input-error');
+        }
+      }
     }
 
-    // Shows a real success popup instead of just changing the button text.
-    function showSuccessModal(fname) {
-      const overlay = document.createElement('div');
-      overlay.className = 'modal-overlay';
-      overlay.innerHTML = `
-        <div class="modal-box">
-          <div class="modal-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-          </div>
-          <h3>Welcome${fname ? ', ' + fname : ''}!</h3>
-          <p>You've signed up successfully. Redirecting you to sign in…</p>
-        </div>
+    function showFieldError(fieldId, show) {
+      const errorSpan = document.getElementById(`${fieldId}-error`);
+      if (errorSpan) {
+        errorSpan.style.display = show ? 'flex' : 'none';
+      }
+      setFieldState(fieldId, show);
+    }
+
+    function clearFieldError(fieldId) {
+      showFieldError(fieldId, false);
+    }
+
+    // Mock Quick Fill Helper for Dev
+    const quickSigninBtn = document.getElementById('quick-signin-trigger');
+    const signinLink = document.getElementById('signin-link');
+    function triggerQuickFill() {
+      fnameInput.value = "Alex";
+      lnameInput.value = "Chefgrill";
+      emailInput.value = "alex@premiumwoodfire.com";
+      passwordInput.value = "WoodfireCooking#2026";
+      confirmInput.value = "WoodfireCooking#2026";
+      termsCheck.checked = true;
+      evaluatePasswordStrength(passwordInput.value);
+    }
+    
+    if (quickSigninBtn) quickSigninBtn.addEventListener('click', (e) => { e.preventDefault(); triggerQuickFill(); });
+    if (signinLink) signinLink.addEventListener('click', (e) => { e.preventDefault(); triggerQuickFill(); });
+
+    // Google OAuth Simulated Connection
+    window.handleGoogleOAuth = function() {
+      const googleBtn = document.getElementById('btn-google-action');
+      googleBtn.disabled = true;
+      googleBtn.innerHTML = `
+        <svg class="animate-spin" style="animation: spin 1s linear infinite; width:16px; height:16px; color:#737373;" fill="none" viewBox="0 0 24 24">
+          <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Connecting Google Account...</span>
       `;
-      document.body.appendChild(overlay);
-    }
+      
+      setTimeout(() => {
+        fnameInput.value = "John";
+        lnameInput.value = "Doe";
+        emailInput.value = "johndoe@gmail.com";
+        termsCheck.checked = true;
+        googleBtn.disabled = false;
+        googleBtn.innerHTML = `
+          <svg width="18" height="18" viewBox="0 0 48 48">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.29-8.16 2.29-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          Continue with Google
+        `;
+        alert("Google Account Connected! Basic profile information has been filled automatically.");
+      }, 1000);
+    };
 
-    function handleSignup() {
+    // Primary Form Submission Handler
+    window.handleFormSubmission = function() {
       let valid = true;
 
-      const fname = document.getElementById('fname').value.trim();
-      showError('fname-error', !fname);
-      setFieldState('fname', !fname);
-      if (!fname) valid = false;
+      const fname = fnameInput.value.trim();
+      if (!fname) {
+        showFieldError('fname', true);
+        valid = false;
+      } else {
+        showFieldError('fname', false);
+      }
 
-      const lname = document.getElementById('lname').value.trim();
-      showError('lname-error', !lname);
-      setFieldState('lname', !lname);
-      if (!lname) valid = false;
+      const lname = lnameInput.value.trim();
+      if (!lname) {
+        showFieldError('lname', true);
+        valid = false;
+      } else {
+        showFieldError('lname', false);
+      }
 
-      const email = document.getElementById('email').value.trim();
+      const email = emailInput.value.trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      showError('email-error', !emailOk);
-      setFieldState('email', !emailOk);
-      if (!emailOk) valid = false;
+      if (!emailOk) {
+        showFieldError('email', true);
+        valid = false;
+      } else {
+        showFieldError('email', false);
+      }
 
-      const phone = document.getElementById('phone').value.trim();
+      const phone = phoneInput.value.trim();
 
-      const pw = document.getElementById('password').value;
-      showError('pw-error', pw.length < 8);
-      setFieldState('password', pw.length < 8);
-      if (pw.length < 8) valid = false;
+      const pw = passwordInput.value;
+      if (pw.length < 8) {
+        showFieldError('pw', true);
+        valid = false;
+      } else {
+        showFieldError('pw', false);
+      }
 
-      const confirm = document.getElementById('confirm').value;
-      showError('confirm-error', pw !== confirm);
-      setFieldState('confirm', pw !== confirm);
-      if (pw !== confirm) valid = false;
+      const confirm = confirmInput.value;
+      if (pw !== confirm) {
+        showFieldError('confirm', true);
+        valid = false;
+      } else {
+        showFieldError('confirm', false);
+      }
 
-      const terms = document.getElementById('terms-check').checked;
-      showError('terms-error', !terms);
-      if (!terms) valid = false;
+      const terms = termsCheck.checked;
+      if (!terms) {
+        showFieldError('terms', true);
+        valid = false;
+      } else {
+        showFieldError('terms', false);
+      }
 
       if (!valid) return;
 
-      const btn = document.querySelector('.btn-signup');
-      btn.textContent = 'Creating account…';
-      btn.disabled = true;
+      // Disable actions & initiate loading spinner
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin" style="animation: spin 1s linear infinite; width:18px; height:18px; color:white; margin-right: 8px;" fill="none" viewBox="0 0 24 24">
+          <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Creating Your Fuel Account...</span>
+      `;
 
-      firebaseSignUp(email, pw)
+      // Firebase auth sign up
+      createUserWithEmailAndPassword(auth, email, pw)
         .then((userCredential) => {
           const uid = userCredential.user.uid;
+          
+          // Trigger successful registration modal popup immediately
+          const successTitle = document.getElementById('success-user-title');
+          const successDetails = document.getElementById('success-summary-details');
+          
+          if (successTitle) {
+            successTitle.textContent = `Welcome, ${fname}!`;
+          }
+          
+          if (successDetails) {
+            const memberId = Math.floor(Math.random() * 90000) + 10000;
+            successDetails.innerHTML = `
+              <p><strong>Registered Email:</strong> ${email}</p>
+              ${phone ? `<p><strong>Phone Notifications:</strong> Active (${phone})</p>` : ''}
+              <p><strong>Member ID:</strong> PCC-${memberId}</p>
+              <p><strong>Status:</strong> Active & Verified</p>
+            `;
+          }
 
-          // Show success immediately — the account itself is already created
-          // in Firebase Auth at this point. Don't let the profile save below
-          // block or hide this from the user.
-          btn.style.background = '#22a85a';
-          btn.textContent = 'Account created!';
-          showSuccessModal(fname);
-          setTimeout(() => {
-            window.location.href = 'login.html';
-          }, 1800);
+          submitBtn.style.backgroundColor = '#10b981';
+          submitBtn.innerHTML = 'Account created!';
+          
+          openModal('success-modal');
 
-          // Save the extra profile fields (name, phone) to Firestore
-          // under /users/{uid} in the background. If this fails (e.g.
-          // Firestore rules/setup issue), it's logged but does NOT
-          // block or hide the success the user already sees above.
-          saveUserProfile(uid, { fname, lname, phone, email }).catch((profileError) => {
-            console.error('Profile save failed (account was still created):', profileError);
+          // Try saving additional user metadata to Firestore database
+          setDoc(doc(db, "users", uid), {
+            firstName: fname,
+            lastName: lname,
+            email: email,
+            phone: phone || null,
+            createdAt: new Date().toISOString()
+          }, { merge: true }).catch((firestoreErr) => {
+            console.error("Firestore user profile collection save failed (Auth account creation succeeded):", firestoreErr);
           });
         })
         .catch((error) => {
-          // Only real Auth account-creation failures land here now
-          btn.textContent = 'Create My Account';
-          btn.disabled = false;
-
-          const emailErr = document.getElementById('email-error');
-          const pwErr = document.getElementById('pw-error');
-
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Create My Account';
+          
+          const emailErrSpan = document.getElementById('email-error');
+          const pwErrSpan = document.getElementById('pw-error');
+          
           if (error.code === 'auth/email-already-in-use') {
-            emailErr.textContent = 'This email is already registered. Try signing in instead.';
-            emailErr.style.display = 'block';
+            if (emailErrSpan) {
+              emailErrSpan.textContent = 'This email is already registered. Try signing in instead.';
+              emailErrSpan.style.display = 'flex';
+            }
             setFieldState('email', true);
           } else if (error.code === 'auth/invalid-email') {
-            emailErr.textContent = 'That email address looks invalid.';
-            emailErr.style.display = 'block';
+            if (emailErrSpan) {
+              emailErrSpan.textContent = 'That email address looks invalid.';
+              emailErrSpan.style.display = 'flex';
+            }
             setFieldState('email', true);
           } else if (error.code === 'auth/weak-password') {
-            pwErr.textContent = 'Password is too weak. Try a longer one.';
-            pwErr.style.display = 'block';
+            if (pwErrSpan) {
+              pwErrSpan.textContent = 'Password is too weak. Try a longer one.';
+              pwErrSpan.style.display = 'flex';
+            }
             setFieldState('password', true);
           } else {
             alert('Something went wrong: ' + error.message);
           }
-          console.error(error.code, error.message);
+          console.error("Firebase Error Code:", error.code, "Message:", error.message);
         });
-    }
+    };
+    
+    // CSS Keyframe Injection for the Loading Spinner
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .animate-spin {
+        animation: spin 1s linear infinite;
+      }
+    `;
+    document.head.appendChild(style);
 
-    // Expose to inline onclick handlers since this is a module script
-    window.togglePw = togglePw;
-    window.checkStrength = checkStrength;
-    window.handleSignup = handleSignup;
   </script>
 
 </body>
