@@ -299,7 +299,7 @@
     }
     .btn-google:hover { background: #f9f9f9; border-color: #bbb; }
 
-    /* RIGHT: Image Panel Styles Only */
+    /* RIGHT PANEL - Image integration */
     .panel-right {
       position: relative;
       overflow: hidden;
@@ -308,7 +308,7 @@
     .panel-right-bg {
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1600628421060-9a8fd0c7b5d3?w=900&q=80') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=80') center/cover no-repeat;
     }
 
     /* ── SUCCESS MODAL ── */
@@ -503,13 +503,42 @@
       </div>
     </div>
 
-    <!-- RIGHT: Clean image panel without overlay filter and text pieces -->
+    <!-- RIGHT: High quality atmospheric charcoal imagery -->
     <div class="panel-right">
       <div class="panel-right-bg"></div>
     </div>
 
   </main>
 
+  <!-- Global scripts setup first so UI events do not break -->
+  <script>
+    function togglePw(inputId, btn) {
+      const input = document.getElementById(inputId);
+      const isText = input.type === 'text';
+      input.type = isText ? 'password' : 'text';
+      btn.querySelector('svg').innerHTML = isText
+        ? '<path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>'
+        : '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
+    }
+
+    function checkStrength(val) {
+      const bars = [document.getElementById('s1'), document.getElementById('s2'), document.getElementById('s3'), document.getElementById('s4')];
+      const label = document.getElementById('strength-label');
+      let score = 0;
+      if (val.length >= 8) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+
+      const colors = ['#e53e3e', '#E8490F', '#f6ad55', '#22a85a'];
+      const labels = ['Weak', 'Fair', 'Good', 'Strong'];
+      bars.forEach((b, i) => { b.style.background = i < score ? colors[score - 1] : '#eee'; });
+      label.textContent = val.length > 0 ? labels[score - 1] || '' : '';
+      label.style.color = score > 0 ? colors[score - 1] : '#888';
+    }
+  </script>
+
+  <!-- Firebase Logic Module -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
@@ -544,34 +573,9 @@
       return setDoc(doc(db, "users", uid), profileData, { merge: true });
     }
 
-    function togglePw(inputId, btn) {
-      const input = document.getElementById(inputId);
-      const isText = input.type === 'text';
-      input.type = isText ? 'password' : 'text';
-      btn.querySelector('svg').innerHTML = isText
-        ? '<path d="M1 12S5 5 12 5s11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>'
-        : '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
-    }
-
-    function checkStrength(val) {
-      const bars = [document.getElementById('s1'), document.getElementById('s2'), document.getElementById('s3'), document.getElementById('s4')];
-      const label = document.getElementById('strength-label');
-      let score = 0;
-      if (val.length >= 8) score++;
-      if (/[A-Z]/.test(val)) score++;
-      if (/[0-9]/.test(val)) score++;
-      if (/[^A-Za-z0-9]/.test(val)) score++;
-
-      const colors = ['#e53e3e', '#E8490F', '#f6ad55', '#22a85a'];
-      const labels = ['Weak', 'Fair', 'Good', 'Strong'];
-      bars.forEach((b, i) => { b.style.background = i < score ? colors[score - 1] : '#eee'; });
-      label.textContent = val.length > 0 ? labels[score - 1] || '' : '';
-      label.style.color = score > 0 ? colors[score - 1] : '#888';
-    }
-
     function showError(id, show) {
       const el = document.getElementById(id);
-      el.style.display = show ? 'block' : 'none';
+      if(el) el.style.display = show ? 'block' : 'none';
     }
 
     function setFieldState(inputId, isError) {
@@ -678,8 +682,6 @@
         });
     }
 
-    window.togglePw = togglePw;
-    window.checkStrength = checkStrength;
     window.handleSignup = handleSignup;
   </script>
 
