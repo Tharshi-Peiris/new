@@ -299,16 +299,24 @@
     }
     .btn-google:hover { background: #f9f9f9; border-color: #bbb; }
 
-    /* RIGHT PANEL - Image integration */
+    /* RIGHT PANEL - Centered image element presentation */
     .panel-right {
-      position: relative;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fdfdfd;
+      padding: 40px;
     }
 
     .panel-right-bg {
-      position: absolute;
-      inset: 0;
-      background: url('https://github.com/Tharshi-Peiris/new/blob/main/signup.jpg') center/cover no-repeat;
+      width: 100%;
+      height: 100%;
+      max-width: 540px;
+      max-height: 680px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      /* Dynamically linked via Raw GitHub URL format */
+      background: url('https://raw.githubusercontent.com/Tharshi-Peiris/new/main/signup.jpg') center/cover no-repeat;
     }
 
     /* ── SUCCESS MODAL ── */
@@ -503,14 +511,13 @@
       </div>
     </div>
 
-    <!-- RIGHT: High quality atmospheric charcoal imagery -->
+    <!-- RIGHT: Centered visual element inside the space -->
     <div class="panel-right">
       <div class="panel-right-bg"></div>
     </div>
 
   </main>
 
-  <!-- Global scripts setup first so UI events do not break -->
   <script>
     function togglePw(inputId, btn) {
       const input = document.getElementById(inputId);
