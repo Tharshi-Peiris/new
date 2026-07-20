@@ -299,10 +299,15 @@
     }
     .btn-google:hover { background: #f9f9f9; border-color: #bbb; }
 
-    /* RIGHT PANEL: Pure Image */
+    /* RIGHT: Image Panel Styles Only */
     .panel-right {
       position: relative;
       overflow: hidden;
+    }
+
+    .panel-right-bg {
+      position: absolute;
+      inset: 0;
       background: url('https://images.unsplash.com/photo-1600628421060-9a8fd0c7b5d3?w=900&q=80') center/cover no-repeat;
     }
 
@@ -498,8 +503,10 @@
       </div>
     </div>
 
-    <!-- RIGHT: Pure image panel -->
-    <div class="panel-right"></div>
+    <!-- RIGHT: Clean image panel without overlay filter and text pieces -->
+    <div class="panel-right">
+      <div class="panel-right-bg"></div>
+    </div>
 
   </main>
 
