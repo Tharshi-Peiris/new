@@ -743,19 +743,27 @@
       firebaseSignUp(email, pw)
         .then((userCredential) => {
           const uid = userCredential.user.uid;
-          // Save the extra profile fields (name, phone) to Firestore
-          // under /users/{uid}, since Firebase Auth only stores email/password.
-          return saveUserProfile(uid, { fname, lname, phone, email });
-        })
-        .then(() => {
+
+          // Show success immediately — the account itself is already created
+          // in Firebase Auth at this point. Don't let the profile save below
+          // block or hide this from the user.
           btn.style.background = '#22a85a';
           btn.textContent = 'Account created!';
           showSuccessModal(fname);
           setTimeout(() => {
             window.location.href = 'login.html';
           }, 1800);
+
+          // Save the extra profile fields (name, phone) to Firestore
+          // under /users/{uid} in the background. If this fails (e.g.
+          // Firestore rules/setup issue), it's logged but does NOT
+          // block or hide the success the user already sees above.
+          saveUserProfile(uid, { fname, lname, phone, email }).catch((profileError) => {
+            console.error('Profile save failed (account was still created):', profileError);
+          });
         })
         .catch((error) => {
+          // Only real Auth account-creation failures land here now
           btn.textContent = 'Create My Account';
           btn.disabled = false;
 
