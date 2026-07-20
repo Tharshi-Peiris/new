@@ -196,7 +196,12 @@
       position: relative;
     }
 
-    .input-wrap svg {
+    /* FIX: use a direct-child selector (>) so this rule only styles the
+       leading mail/lock icon, not the eye icon nested inside .toggle-pw.
+       The old descendant selector (.input-wrap svg) was matching BOTH
+       svgs and yanking the eye icon out to left:14px, on top of the
+       lock icon, leaving the toggle button visually empty. */
+    .input-wrap > svg {
       position: absolute;
       left: 14px;
       top: 50%;
@@ -228,7 +233,7 @@
     }
 
     .input-wrap input:focus + svg,
-    .input-wrap:focus-within svg { color: var(--orange); }
+    .input-wrap:focus-within > svg { color: var(--orange); }
 
     /* toggle password */
     .toggle-pw {
@@ -243,9 +248,15 @@
       padding: 0;
       display: flex;
       align-items: center;
+      z-index: 2; /* sit above the input so clicks always land on the button */
     }
     .toggle-pw:hover { color: var(--orange); }
-    .toggle-pw svg { width: 18px; height: 18px; }
+    .toggle-pw svg {
+      width: 18px;
+      height: 18px;
+      position: static;   /* explicitly override any inherited absolute positioning */
+      pointer-events: none;
+    }
 
     .field-footer {
       display: flex;
