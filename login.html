@@ -493,7 +493,7 @@
     const auth = getAuth(app);
     const googleProvider = new GoogleAuthProvider();
 
-    const HOME_URL = 'index.html';
+    const HOME_URL = 'https://tharshi-peiris.github.io/new/';
 
     function firebaseLogin(email, password) {
       return signInWithEmailAndPassword(auth, email, password);
@@ -544,8 +544,7 @@
 
       firebaseLogin(email.value.trim(), pw.value)
         .then(() => {
-          // Mark the session as logged in BEFORE redirecting,
-          // so index.html's guard script lets the user through.
+          // Mark the session as logged in so index.html's guard script lets us through.
           localStorage.setItem('isLoggedIn', 'true');
           window.location.href = HOME_URL;
         })
@@ -568,7 +567,7 @@
 
       signInWithPopup(auth, googleProvider)
         .then(() => {
-          // Same fix here — set the flag before redirecting.
+          // Mark the session as logged in so index.html's guard script lets us through.
           localStorage.setItem('isLoggedIn', 'true');
           window.location.href = HOME_URL;
         })
