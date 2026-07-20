@@ -360,16 +360,6 @@
     }
     .perk-icon svg { width: 18px; height: 18px; color: var(--orange); }
 
-    footer {
-      background: var(--dark);
-      color: rgba(255,255,255,0.4);
-      text-align: center;
-      padding: 18px 48px;
-      font-size: 0.82rem;
-      flex-shrink: 0;
-    }
-    footer span { color: var(--orange); }
-
     /* ── SUCCESS MODAL ── */
     .modal-overlay {
       position: fixed;
@@ -606,10 +596,6 @@
 
   </main>
 
-  <footer>
-    <p>© 2024 <span>Premium Charcoal Co.</span> — All rights reserved.</p>
-  </footer>
-
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
@@ -640,8 +626,6 @@
       return createUserWithEmailAndPassword(auth, email, password);
     }
 
-    // Firebase Auth only stores email/password, so the extra profile
-    // fields (name, phone) get saved separately in Firestore under /users/{uid}.
     function saveUserProfile(uid, profileData) {
       return setDoc(doc(db, "users", uid), profileData, { merge: true });
     }
@@ -681,7 +665,6 @@
       if (input) input.style.borderColor = isError ? '#e53e3e' : '#ddd';
     }
 
-    // Shows a real success popup instead of just changing the button text.
     function showSuccessModal(fname) {
       const overlay = document.createElement('div');
       overlay.className = 'modal-overlay';
@@ -744,9 +727,6 @@
         .then((userCredential) => {
           const uid = userCredential.user.uid;
 
-          // Show success immediately — the account itself is already created
-          // in Firebase Auth at this point. Don't let the profile save below
-          // block or hide this from the user.
           btn.style.background = '#22a85a';
           btn.textContent = 'Account created!';
           showSuccessModal(fname);
@@ -754,16 +734,11 @@
             window.location.href = 'login.html';
           }, 1800);
 
-          // Save the extra profile fields (name, phone) to Firestore
-          // under /users/{uid} in the background. If this fails (e.g.
-          // Firestore rules/setup issue), it's logged but does NOT
-          // block or hide the success the user already sees above.
           saveUserProfile(uid, { fname, lname, phone, email }).catch((profileError) => {
             console.error('Profile save failed (account was still created):', profileError);
           });
         })
         .catch((error) => {
-          // Only real Auth account-creation failures land here now
           btn.textContent = 'Create My Account';
           btn.disabled = false;
 
@@ -789,7 +764,6 @@
         });
     }
 
-    // Expose to inline onclick handlers since this is a module script
     window.togglePw = togglePw;
     window.checkStrength = checkStrength;
     window.handleSignup = handleSignup;
