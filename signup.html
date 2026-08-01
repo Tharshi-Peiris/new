@@ -308,6 +308,7 @@
       transition: background 0.2s, border-color 0.2s;
     }
     .btn-google:hover { background: #f9f9f9; border-color: #bbb; }
+    .btn-google:disabled { opacity: 0.7; cursor: not-allowed; }
 
     /* Column 2: Dedicated Image Panel */
     .panel-right {
@@ -563,7 +564,10 @@
     import {
       getFirestore,
       doc,
-      setDoc
+      setDoc,
+      addDoc,
+      collection,
+      serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -584,8 +588,25 @@
       return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    // createdAt + provider are what the dashboard groups by to build the
+    // "sign-ups per day" chart and the recent-signups table.
     function saveUserProfile(uid, profileData) {
-      return setDoc(doc(db, "users", uid), profileData, { merge: true });
+      return setDoc(doc(db, "users", uid), {
+        ...profileData,
+        provider: 'password',
+        createdAt: serverTimestamp()
+      }, { merge: true });
+    }
+
+    // One row per signup in 'logins' — this is what the dashboard counts
+    // for "sign-ups today" alongside the users collection.
+    function logSignupEvent(uid, email) {
+      return addDoc(collection(db, 'logins'), {
+        uid,
+        email,
+        event: 'signup',
+        timestamp: serverTimestamp()
+      }).catch((e) => console.error('Failed to log signup event:', e));
     }
 
     function showError(id, show) {
@@ -670,6 +691,7 @@
           saveUserProfile(uid, { fname, lname, phone, email }).catch((profileError) => {
             console.error('Profile save failed (account was still created):', profileError);
           });
+          logSignupEvent(uid, email);
         })
         .catch((error) => {
           btn.textContent = 'Create My Account';
