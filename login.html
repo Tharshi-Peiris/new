@@ -509,6 +509,15 @@
       GoogleAuthProvider,
       sendPasswordResetEmail
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      addDoc,
+      collection,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAXXfVgDZkjJ5-DwcP5PjZACuMJfnUv_AA",
@@ -522,12 +531,48 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
     const googleProvider = new GoogleAuthProvider();
 
     const HOME_URL = 'https://tharshi-peiris.github.io/new/';
 
     function firebaseLogin(email, password) {
       return signInWithEmailAndPassword(auth, email, password);
+    }
+
+    // Records one row in the 'logins' collection — this is what the
+    // dashboard counts to show "logins per day".
+    function logEvent(user, eventType) {
+      return addDoc(collection(db, 'logins'), {
+        uid: user.uid,
+        email: user.email,
+        event: eventType,
+        timestamp: serverTimestamp()
+      }).catch((e) => console.error('Failed to log event:', e));
+    }
+
+    // Google sign-in can be either a brand-new signup or a returning login.
+    // Check whether a 'users' profile doc already exists for this uid to tell
+    // which one it is, and create the profile (with createdAt) if it's new —
+    // otherwise Google-only users would never show up in the dashboard's
+    // sign-up counts.
+    async function ensureUserDocAndLog(user) {
+      const userRef = doc(db, 'users', user.uid);
+      const snap = await getDoc(userRef);
+      if (!snap.exists()) {
+        const [fname, ...rest] = (user.displayName || '').split(' ');
+        await setDoc(userRef, {
+          fname: fname || '',
+          lname: rest.join(' ') || '',
+          phone: '',
+          email: user.email,
+          provider: 'google',
+          createdAt: serverTimestamp()
+        });
+        await logEvent(user, 'signup');
+      } else {
+        await logEvent(user, 'login');
+      }
     }
 
     function togglePw(inputId, btn) {
@@ -574,9 +619,8 @@
       btn.disabled = true;
 
       firebaseLogin(email.value.trim(), pw.value)
-        .then(() => {
-          // Mark the session as logged in so index.html's guard script lets us through.
-          localStorage.setItem('isLoggedIn', 'true');
+        .then(async (cred) => {
+          await logEvent(cred.user, 'login');
           window.location.href = HOME_URL;
         })
         .catch((error) => {
@@ -597,9 +641,8 @@
       btn.disabled = true;
 
       signInWithPopup(auth, googleProvider)
-        .then(() => {
-          // Mark the session as logged in so index.html's guard script lets us through.
-          localStorage.setItem('isLoggedIn', 'true');
+        .then(async (result) => {
+          await ensureUserDocAndLog(result.user);
           window.location.href = HOME_URL;
         })
         .catch((error) => {
