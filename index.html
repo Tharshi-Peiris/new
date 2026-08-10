@@ -118,8 +118,21 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('https://raw.githubusercontent.com/Tharshi-Peiris/new/main/bg.jpg') center/cover no-repeat;
+    }
+
+    .hero-bg-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       filter: brightness(0.45);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .hero-bg-slide.active {
+      opacity: 1;
     }
 
     .hero-content {
@@ -476,7 +489,11 @@
 
   <!-- HERO -->
   <section id="home">
-    <div class="hero-bg"></div>
+    <div class="hero-bg">
+      <div class="hero-bg-slide active" style="background-image:url('https://raw.githubusercontent.com/Tharshi-Peiris/new/main/bg.jpg')"></div>
+      <div class="hero-bg-slide" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80')"></div>
+      <div class="hero-bg-slide" style="background-image:url('https://images.unsplash.com/photo-1600628421060-9a8fd0c7b5d3?w=1600&q=80')"></div>
+    </div>
     <div class="hero-content">
       <img
         src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_1.png"
@@ -622,6 +639,21 @@
   <footer>
     <p>© 2024 <span>Premium Charcoal Co.</span> — All rights reserved.</p>
   </footer>
+
+  <!-- Hero background slideshow: cycles through the images every 2 seconds -->
+  <script>
+    (function () {
+      const slides = document.querySelectorAll('.hero-bg-slide');
+      let current = 0;
+      if (slides.length > 1) {
+        setInterval(() => {
+          slides[current].classList.remove('active');
+          current = (current + 1) % slides.length;
+          slides[current].classList.add('active');
+        }, 2000);
+      }
+    })();
+  </script>
 
   <!-- Firebase: real auth guard + analytics + logout -->
   <script type="module">
