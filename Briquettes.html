@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sawdust Charcoal Briquettes — Premium Charcoal Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E8490F;
+      --orange-hover: #c93d0c;
+      --dark: #1a1a1a;
+      --white: #ffffff;
+      --gray-bg: #f4f4f4;
+      --text-muted: #666;
+      --text-dark: #1a1a1a;
+      --card-radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-dark);
+      background: #fff;
+      visibility: hidden; /* revealed once Firebase confirms the visitor is signed in */
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 80px;
+      overflow: hidden;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-brand img {
+      height: 78px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { opacity: 1; }
+
+    .nav-login {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #ffffff !important;
+      font-weight: 700;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      max-width: 1100px;
+      margin: 28px auto 0;
+      padding: 0 48px;
+    }
+    .breadcrumb a {
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* ── PRODUCT DETAIL ── */
+    .product-detail {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 48px 90px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .product-detail img {
+      width: 100%;
+      border-radius: var(--card-radius);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+      object-fit: cover;
+      max-height: 480px;
+    }
+
+    .product-info h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      display: inline-block;
+      color: var(--orange);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 22px;
+    }
+
+    .product-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .product-info h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .product-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+    .product-features li {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      padding: 4px 0;
+    }
+    .product-features li::before { content: "• "; color: var(--orange); font-weight: 700; }
+
+    .product-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: var(--white);
+      padding: 15px 32px;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-contact:hover { background: var(--orange-hover); transform: translateY(-2px); }
+
+    .btn-outline-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-dark);
+      border: 2px solid var(--dark);
+      padding: 13px 30px;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline-dark:hover { background: var(--dark); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #000000;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 24px 48px;
+      font-size: 0.85rem;
+    }
+    footer span { color: #E8490F; font-weight: 700; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 28px; }
+      .nav-brand img { height: 56px; }
+      .breadcrumb, .product-detail { padding-left: 28px; padding-right: 28px; }
+      .product-detail { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; height: 64px; }
+      .nav-brand img { height: 44px; }
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 0.82rem; }
+      .breadcrumb, .product-detail { padding-left: 20px; padding-right: 20px; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 0 12px; height: 58px; }
+      .nav-brand img { height: 38px; }
+      .nav-links { gap: 10px; }
+      .nav-links a { font-size: 0.72rem; }
+      .breadcrumb, .product-detail { padding-left: 16px; padding-right: 16px; }
+      .product-detail { padding-top: 24px; padding-bottom: 48px; }
+      .product-actions { flex-direction: column; width: 100%; }
+      .btn-contact, .btn-outline-dark { width: 100%; justify-content: center; }
+      footer { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <img
+        src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/logo_2.png"
+        alt="Premium Charcoal Co. logo"
+      />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#products">Products</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li>
+        <a href="#" id="logoutLink" class="nav-login">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h6v18h-6M10 17l5-5-5-5M3 12h12"/>
+          </svg>
+          Log Out
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="index.html#products">&larr; Back to Products</a>
+  </div>
+
+  <!-- PRODUCT DETAIL -->
+  <section class="product-detail">
+    <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_2.jpg" alt="Sawdust Charcoal Briquettes" />
+    <div class="product-info">
+      <h1>Sawdust Charcoal Briquettes</h1>
+      <span class="product-price">From $10 / 5kg bag</span>
+      <p class="product-desc">
+        Compressed charcoal briquettes engineered for consistent, long-lasting heat. Their uniform shape and density make them ideal for extended cooking sessions like smoking and slow roasting.
+      </p>
+      <h4>Details</h4>
+      <ul class="product-features">
+        <li>Available in 5kg and 10kg bags</li>
+        <li>Consistent, predictable burn time</li>
+        <li>Low smoke production</li>
+        <li>Easy to light and maintain temperature</li>
+      </ul>
+      <div class="product-actions">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@premiumcharcoal.com&su=New%20Order%20-%20Sawdust%20Charcoal%20Briquettes&body=Hi%2C%0A%0AI%27d%20like%20to%20place%20an%20order%20for%3A%0A%0A-%20Product%3A%20Sawdust%20Charcoal%20Briquettes%0A-%20Quantity%3A%0A-%20Delivery%20location%3A%0A%0AThanks!" target="_blank" rel="noopener" class="btn-contact">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          Order This Product
+        </a>
+        <a href="index.html#products" class="btn-outline-dark">View Other Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2024 <span>Premium Charcoal Co.</span> — All rights reserved.</p>
+  </footer>
+
+  <!-- Firebase: real auth guard + analytics + logout -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAXXfVgDZkjJ5-DwcP5PjZACuMJfnUv_AA",
+      authDomain: "tharushi-8b869.firebaseapp.com",
+      projectId: "tharushi-8b869",
+      storageBucket: "tharushi-8b869.firebasestorage.app",
+      messagingSenderId: "265329735348",
+      appId: "1:265329735348:web:8263202e454044fd2549e1",
+      measurementId: "G-M4W3RTE0DZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.body.style.visibility = 'visible';
+      } else {
+        window.location.replace('login.html');
+      }
+    });
+
+    document.getElementById('logoutLink').addEventListener('click', async function (e) {
+      e.preventDefault();
+      await signOut(auth);
+      window.location.href = 'login.html';
+    });
+  </script>
+
+</body>
+</html>
