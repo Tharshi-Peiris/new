@@ -347,111 +347,6 @@
     }
     .btn-dark:hover { background: #333; transform: translateY(-1px); }
 
-    /* ── PRODUCT MODAL ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-    .modal-overlay.open {
-      display: flex;
-      opacity: 1;
-    }
-
-    .modal-box {
-      background: #fff;
-      border-radius: var(--card-radius);
-      max-width: 560px;
-      width: 100%;
-      max-height: 88vh;
-      overflow-y: auto;
-      position: relative;
-      transform: translateY(20px);
-      transition: transform 0.25s ease;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    .modal-overlay.open .modal-box {
-      transform: translateY(0);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.55);
-      color: #fff;
-      border: none;
-      font-size: 1.3rem;
-      line-height: 1;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      transition: background 0.2s;
-    }
-    .modal-close:hover { background: rgba(0,0,0,0.8); }
-
-    .modal-img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .modal-content { padding: 28px 28px 32px; }
-
-    .modal-content h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.5rem;
-      margin-bottom: 6px;
-    }
-
-    .modal-price {
-      display: inline-block;
-      color: var(--orange);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 14px;
-    }
-
-    .modal-content p.modal-desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-
-    .modal-content h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: var(--text-dark);
-    }
-
-    .modal-content .product-features { margin-bottom: 26px; }
-
-    .modal-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
     /* ── CONTACT ── */
     #contact {
       padding: 90px 48px;
@@ -542,7 +437,6 @@
       .section-title { margin-bottom: 40px; }
       .contact-grid { gap: 36px; }
       .product-card img { height: 200px; }
-      .modal-img { height: 200px; }
     }
 
     /* Small phones */
@@ -565,10 +459,6 @@
       .contact-grid { gap: 28px; }
       .btn-contact { width: 100%; justify-content: center; padding: 16px 24px; }
       footer { padding: 20px 16px; }
-      .modal-content { padding: 22px 20px 26px; }
-      .modal-actions { flex-direction: column; }
-      .modal-actions .btn-dark,
-      .modal-actions .btn-contact { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -668,53 +558,32 @@
     <h2 class="section-title">Our Products</h2>
     <div class="products-grid">
 
-      <div class="product-card" data-product="lump">
-        <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_1.jpg" />
+      <div class="product-card" onclick="window.location.href='lump.html'">
+        <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_1.jpg" alt="Sawdust Briquettes" />
         <div class="product-body">
           <h3>Sawdust Briquettes</h3>
-        
-          <button type="button" class="btn-dark" data-product="lump">Learn More</button>
+          <a href="lump.html" class="btn-dark">Learn More</a>
         </div>
       </div>
 
-      <div class="product-card" data-product="briquettes">
-        <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_2.jpg" />
+      <div class="product-card" onclick="window.location.href='briquettes.html'">
+        <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_2.jpg" alt="Sawdust Charcoal Briquettes" />
         <div class="product-body">
           <h3>Sawdust Charcoal Briquettes</h3>
-          
-          <button type="button" class="btn-dark" data-product="briquettes">Learn More</button>
+          <a href="briquettes.html" class="btn-dark">Learn More</a>
         </div>
       </div>
 
-      <div class="product-card" data-product="coconut">
-       <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_3.jpeg" />
+      <div class="product-card" onclick="window.location.href='coconut.html'">
+        <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_3.jpeg" alt="Sawdust Charcoal Briquettes" />
         <div class="product-body">
           <h3>Sawdust Charcoal Briquettes</h3>
-          
-          <button type="button" class="btn-dark" data-product="coconut">Learn More</button>
+          <a href="coconut.html" class="btn-dark">Learn More</a>
         </div>
       </div>
 
     </div>
   </section>
-
-  <!-- PRODUCT DETAIL MODAL -->
-  <div class="modal-overlay" id="productModal">
-    <div class="modal-box">
-      <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-      <img id="modalImg" class="modal-img" src="" alt="" />
-      <div class="modal-content">
-        <h3 id="modalTitle"></h3>
-        <span class="modal-price" id="modalPrice"></span>
-        <p class="modal-desc" id="modalDesc"></p>
-        <h4>Details</h4>
-        <ul class="product-features" id="modalFeatures"></ul>
-        <div class="modal-actions">
-          <a href="#" id="modalOrder" target="_blank" rel="noopener" class="btn-contact">Order This Product</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- CONTACT -->
   <section id="contact">
@@ -778,108 +647,6 @@
           slides[current].classList.add('active');
         }, 2000);
       }
-    })();
-  </script>
-
-  <!-- Product detail popup -->
-  <script>
-    (function () {
-      const PRODUCTS = {
-        lump: {
-          name: "Lump Charcoal",
-          price: "From $12 / 5kg bag",
-          img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80",
-          desc: "Pure hardwood lump charcoal, perfect for grilling and BBQ. Made from natural wood with no binders, it lights fast and burns clean with minimal ash, giving food an authentic smoky flavor.",
-          features: [
-            "Available in 5kg, 10kg, and 20kg bags",
-            "High carbon content for hotter, longer burns",
-            "Fast lighting, minimal smoke",
-            "No additives, chemicals, or fillers"
-          ]
-        },
-        briquettes: {
-          name: "Premium Briquettes",
-          price: "From $10 / 5kg bag",
-          img: "https://images.unsplash.com/photo-1600628421060-9a8fd0c7b5d3?w=1000&q=80",
-          desc: "Compressed charcoal briquettes engineered for consistent, long-lasting heat. Their uniform shape and density make them ideal for extended cooking sessions like smoking and slow roasting.",
-          features: [
-            "Available in 5kg and 10kg bags",
-            "Consistent, predictable burn time",
-            "Low smoke production",
-            "Easy to light and maintain temperature"
-          ]
-        },
-        coconut: {
-          name: "Coconut Shell Charcoal",
-          price: "From $14 / 5kg bag",
-          img: "https://images.unsplash.com/photo-1621955964441-c173e01c135b?w=1000&q=80",
-          desc: "An eco-friendly charcoal made from recycled coconut shells, prized for its exceptional heat density and clean, odorless burn. A popular choice for both home grilling and industrial use.",
-          features: [
-            "Available in 5kg and 10kg bags",
-            "Long burn time with very low ash",
-            "Odorless and virtually smokeless",
-            "Made from sustainable coconut shell byproduct"
-          ]
-        }
-      };
-
-      const overlay = document.getElementById('productModal');
-      const modalImg = document.getElementById('modalImg');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalPrice = document.getElementById('modalPrice');
-      const modalDesc = document.getElementById('modalDesc');
-      const modalFeatures = document.getElementById('modalFeatures');
-      const modalOrder = document.getElementById('modalOrder');
-      const modalClose = document.getElementById('modalClose');
-
-      function openModal(key) {
-        const p = PRODUCTS[key];
-        if (!p) return;
-
-        modalImg.src = p.img;
-        modalImg.alt = p.name;
-        modalTitle.textContent = p.name;
-        modalPrice.textContent = p.price;
-        modalDesc.textContent = p.desc;
-
-        modalFeatures.innerHTML = '';
-        p.features.forEach(function (f) {
-          const li = document.createElement('li');
-          li.textContent = f;
-          modalFeatures.appendChild(li);
-        });
-
-        const body = "Hi,%0A%0AI'd like to place an order for:%0A%0A- Product: " +
-          encodeURIComponent(p.name) +
-          "%0A- Quantity:%0A- Delivery location:%0A%0AThanks!";
-        modalOrder.href = "https://mail.google.com/mail/?view=cm&fs=1&to=info@premiumcharcoal.com&su=" +
-          encodeURIComponent("New Order - " + p.name) + "&body=" + body;
-
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-
-      document.querySelectorAll('[data-product]').forEach(function (el) {
-        el.addEventListener('click', function (e) {
-          // Prevent card click from double-firing when the inner button is clicked
-          if (el.classList.contains('product-card') && e.target.closest('button')) return;
-          e.preventDefault();
-          openModal(el.getAttribute('data-product'));
-        });
-      });
-
-      modalClose.addEventListener('click', closeModal);
-      overlay.addEventListener('click', function (e) {
-        if (e.target === overlay) closeModal();
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
-      });
     })();
   </script>
 
