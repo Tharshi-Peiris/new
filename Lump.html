@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sawdust Briquettes — Premium Charcoal Co.</title>
+  <title>Sawdust Charcoal Briquettes — Premium Charcoal Co.</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -96,11 +96,11 @@
     }
     .breadcrumb a:hover { text-decoration: underline; }
 
-    /* ── PRODUCT DETAIL ── */
+    /* ── PRODUCT HEADER ── */
     .product-detail {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 32px 48px 90px;
+      padding: 32px 48px 20px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 56px;
@@ -113,55 +113,43 @@
       box-shadow: 0 8px 28px rgba(0,0,0,0.12);
       object-fit: cover;
       max-height: 480px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .product-info .eyebrow {
+      display: inline-block;
+      color: var(--orange);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
     .product-info h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: clamp(1.8rem, 3.2vw, 2.4rem);
-      margin-bottom: 10px;
-    }
-
-    .product-price {
-      display: inline-block;
-      color: var(--orange);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
+      line-height: 1.2;
     }
 
     .product-desc {
       font-size: 1rem;
       color: var(--text-muted);
       line-height: 1.75;
-      margin-bottom: 28px;
+      margin-bottom: 18px;
     }
 
-    .product-info h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .product-features {
-      list-style: none;
-      margin-bottom: 32px;
-    }
-    .product-features li {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      padding: 4px 0;
-    }
-    .product-features li::before { content: "• "; color: var(--orange); font-weight: 700; }
+    .product-desc strong { color: var(--text-dark); }
 
     .product-actions {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
+      margin-top: 12px;
     }
 
     .btn-contact {
@@ -199,6 +187,187 @@
     }
     .btn-outline-dark:hover { background: var(--dark); color: var(--white); }
 
+    /* ── CONTENT SECTIONS ── */
+    .content-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 48px;
+    }
+    .content-section.alt { background: var(--gray-bg); max-width: none; }
+    .content-section.alt .inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+    .content-section:not(.alt) + .content-section.alt,
+    .content-section.alt + .content-section:not(.alt) { padding-top: 40px; }
+
+    .content-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+      margin-bottom: 16px;
+      color: var(--text-dark);
+    }
+
+    .content-section p {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 14px;
+      max-width: 800px;
+    }
+
+    .content-section p strong { color: var(--text-dark); }
+
+    /* Process flow */
+    .process-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 24px 0 6px;
+    }
+    .process-step {
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .content-section.alt .process-step { background: #fff; }
+    .process-arrow {
+      color: var(--orange);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    /* Benefits grid */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .benefit-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .benefit-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--orange);
+    }
+    .benefit-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* Applications grid */
+    .applications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .application-card {
+      background: #fff;
+      border-left: 4px solid var(--orange);
+      border-radius: 8px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .application-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+    }
+    .application-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    /* Comparison table */
+    .compare-wrap {
+      overflow-x: auto;
+      margin-top: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    }
+    table.compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      min-width: 620px;
+    }
+    table.compare-table th, table.compare-table td {
+      text-align: left;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #eee;
+    }
+    table.compare-table th {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      background: var(--dark);
+      color: #fff;
+    }
+    table.compare-table td:first-child,
+    table.compare-table th:first-child {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    table.compare-table td { color: var(--text-muted); }
+    table.compare-table tr:last-child td { border-bottom: none; }
+    table.compare-table td.highlight {
+      color: var(--orange);
+      font-weight: 600;
+    }
+    .compare-footnote {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    .tagline-box {
+      background: var(--dark);
+      color: #fff;
+      border-radius: var(--card-radius);
+      padding: 40px 48px;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+    }
+    .tagline-box .eyebrow {
+      color: var(--orange);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .tagline-box h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+      margin-bottom: 12px;
+    }
+    .tagline-box p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.98rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: #000000;
@@ -213,8 +382,10 @@
     @media (max-width: 900px) {
       nav { padding: 0 28px; }
       .nav-brand img { height: 56px; }
-      .breadcrumb, .product-detail { padding-left: 28px; padding-right: 28px; }
+      .breadcrumb, .product-detail, .content-section, .content-section.alt .inner { padding-left: 28px; padding-right: 28px; }
       .product-detail { grid-template-columns: 1fr; gap: 32px; }
+      .product-detail img { position: static; }
+      .tagline-box { margin-left: 28px; margin-right: 28px; padding: 32px 28px; width: calc(100% - 56px); }
     }
 
     @media (max-width: 768px) {
@@ -222,7 +393,8 @@
       .nav-brand img { height: 44px; }
       .nav-links { gap: 14px; }
       .nav-links a { font-size: 0.82rem; }
-      .breadcrumb, .product-detail { padding-left: 20px; padding-right: 20px; }
+      .breadcrumb, .product-detail, .content-section, .content-section.alt .inner { padding-left: 20px; padding-right: 20px; }
+      .tagline-box { margin-left: 20px; margin-right: 20px; width: calc(100% - 40px); }
     }
 
     @media (max-width: 480px) {
@@ -230,10 +402,12 @@
       .nav-brand img { height: 38px; }
       .nav-links { gap: 10px; }
       .nav-links a { font-size: 0.72rem; }
-      .breadcrumb, .product-detail { padding-left: 16px; padding-right: 16px; }
-      .product-detail { padding-top: 24px; padding-bottom: 48px; }
+      .breadcrumb, .product-detail, .content-section, .content-section.alt .inner { padding-left: 16px; padding-right: 16px; }
+      .product-detail { padding-top: 24px; padding-bottom: 12px; }
+      .content-section { padding-top: 28px; padding-bottom: 28px; }
       .product-actions { flex-direction: column; width: 100%; }
       .btn-contact, .btn-outline-dark { width: 100%; justify-content: center; }
+      .tagline-box { margin-left: 16px; margin-right: 16px; width: calc(100% - 32px); padding: 26px 20px; }
       footer { padding: 20px 16px; }
     }
   </style>
@@ -268,24 +442,20 @@
     <a href="index.html#products">&larr; Back to Products</a>
   </div>
 
-  <!-- PRODUCT DETAIL -->
+  <!-- PRODUCT HEADER -->
   <section class="product-detail">
-    <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_1.jpg" alt="Sawdust Briquettes" />
+    <img src="https://raw.githubusercontent.com/Tharshi-Peiris/new/main/sawdust_1.jpg" alt="Sawdust Charcoal Briquettes" />
     <div class="product-info">
-      <h1>Sawdust Briquettes</h1>
-      <span class="product-price">From $12 / 5kg bag</span>
+      <span class="eyebrow">Sylvara Energy</span>
+      <h1>Sawdust Charcoal Briquettes</h1>
       <p class="product-desc">
-        Pure hardwood lump charcoal, perfect for grilling and BBQ. Made from natural wood with no binders, it lights fast and burns clean with minimal ash, giving food an authentic smoky flavor.
+        <strong>Sawdust charcoal briquettes</strong> are a sustainable and efficient fuel produced by converting compressed wood-processing waste into high-density charcoal. At <strong>Sylvara Energy</strong>, we transform carefully selected sawdust into consistent, long-burning charcoal briquettes designed for domestic, commercial, and industrial applications.
       </p>
-      <h4>Details</h4>
-      <ul class="product-features">
-        <li>Available in 5kg, 10kg, and 20kg bags</li>
-        <li>High carbon content for hotter, longer burns</li>
-        <li>Fast lighting, minimal smoke</li>
-        <li>No additives, chemicals, or fillers</li>
-      </ul>
+      <p class="product-desc">
+        Our briquettes offer <strong>stable heat, extended burning performance, low smoke, and low ash</strong>, making them a practical alternative to conventional lump charcoal for a wide range of applications.
+      </p>
       <div class="product-actions">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@premiumcharcoal.com&su=New%20Order%20-%20Sawdust%20Briquettes&body=Hi%2C%0A%0AI%27d%20like%20to%20place%20an%20order%20for%3A%0A%0A-%20Product%3A%20Sawdust%20Briquettes%0A-%20Quantity%3A%0A-%20Delivery%20location%3A%0A%0AThanks!" target="_blank" rel="noopener" class="btn-contact">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@premiumcharcoal.com&su=New%20Order%20-%20Sawdust%20Charcoal%20Briquettes&body=Hi%2C%0A%0AI%27d%20like%20to%20place%20an%20order%20for%3A%0A%0A-%20Product%3A%20Sawdust%20Charcoal%20Briquettes%0A-%20Quantity%3A%0A-%20Delivery%20location%3A%0A%0AThanks!" target="_blank" rel="noopener" class="btn-contact">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
           </svg>
@@ -294,6 +464,181 @@
         <a href="index.html#products" class="btn-outline-dark">View Other Products</a>
       </div>
     </div>
+  </section>
+
+  <!-- SUSTAINABLE FUEL -->
+  <section class="content-section">
+    <h2>Sustainable Fuel from Wood Waste</h2>
+    <p>At Sylvara Energy, we believe wood waste can become a valuable energy resource. Our sawdust charcoal is produced from wood-processing by-products, helping reduce waste while creating a more sustainable source of solid fuel.</p>
+  </section>
+
+  <!-- PRODUCTION PROCESS -->
+  <section class="content-section alt">
+    <div class="inner">
+      <h2>Our Production Process</h2>
+      <p>Our production process is carefully controlled to achieve consistent quality:</p>
+      <div class="process-flow">
+        <span class="process-step">Raw Material</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Drying</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Briquetting</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Carbonization</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Cooling</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Quality Inspection</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Packaging</span>
+      </div>
+      <p style="margin-top: 20px;">The sawdust is first dried to achieve suitable moisture levels before being compressed into dense briquettes. The briquettes then undergo controlled carbonization in an oxygen-limited environment, converting the compressed biomass into high-quality charcoal. After cooling, the finished product is inspected for consistency and performance before packaging.</p>
+    </div>
+  </section>
+
+  <!-- KEY BENEFITS -->
+  <section class="content-section">
+    <h2>Key Benefits</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <h3>Sustainable</h3>
+        <p>Produced using wood-processing by-products.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Long Burning</h3>
+        <p>High-density briquettes provide extended heat output.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Consistent Heat</h3>
+        <p>Uniform size and density support stable combustion.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Low Smoke</h3>
+        <p>Designed for cleaner burning with minimal smoke.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Low Ash</h3>
+        <p>Produces less residual ash compared with many traditional fuels.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Easy to Handle</h3>
+        <p>Uniform briquettes simplify storage, transportation, and use.</p>
+      </div>
+      <div class="benefit-card">
+        <h3>Versatile</h3>
+        <p>Suitable for BBQ, restaurants, commercial kitchens, heating, and selected industrial applications.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATIONS -->
+  <section class="content-section alt">
+    <div class="inner">
+      <h2>Applications</h2>
+      <p>Sylvara sawdust charcoal briquettes can be used across a variety of applications, including:</p>
+      <div class="applications-grid">
+        <div class="application-card">
+          <h3>BBQ &amp; Grilling</h3>
+          <p>Provides steady and consistent heat for outdoor cooking and professional grilling.</p>
+        </div>
+        <div class="application-card">
+          <h3>Restaurants &amp; Commercial Kitchens</h3>
+          <p>A practical fuel solution where reliable and sustained heat is required.</p>
+        </div>
+        <div class="application-card">
+          <h3>Food Smoking</h3>
+          <p>Suitable for applications requiring controlled and consistent heat.</p>
+        </div>
+        <div class="application-card">
+          <h3>Heating Applications</h3>
+          <p>Can be used as a solid fuel for suitable domestic and commercial heating systems.</p>
+        </div>
+        <div class="application-card">
+          <h3>Industrial Applications</h3>
+          <p>Suitable for selected industrial processes requiring a dependable solid fuel source.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE SYLVARA -->
+  <section class="content-section">
+    <h2>Why Choose Sylvara Energy?</h2>
+    <p>At <strong>Sylvara Energy</strong>, our focus is on combining sustainability, reliable production, and consistent product quality. We aim to provide customers with dependable biomass and charcoal fuel solutions for both local and international markets.</p>
+    <p>From raw material selection to final packaging, we emphasize <strong>quality, consistency, efficiency, and responsible resource utilization</strong>.</p>
+  </section>
+
+  <!-- TAGLINE -->
+  <section class="content-section">
+    <div class="tagline-box">
+      <span class="eyebrow">A Better Way to Use Biomass</span>
+      <h2>Turning wood waste into reliable energy.</h2>
+      <p>Sylvara Energy is committed to developing sustainable solid-fuel solutions that support a cleaner and more resource-efficient future.</p>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="content-section">
+    <h2>Sawdust vs. Coconut Charcoal</h2>
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Sylvara Sawdust Charcoal</th>
+            <th>Coconut Charcoal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Raw Material</td>
+            <td>Compressed sawdust</td>
+            <td>Coconut shells</td>
+          </tr>
+          <tr>
+            <td>Burning Time</td>
+            <td class="highlight">6–7 hours*</td>
+            <td>3–3.5 hours*</td>
+          </tr>
+          <tr>
+            <td>Heat Output</td>
+            <td>7,000–8,000 kcal/kg*</td>
+            <td>7,000–7,500 kcal/kg*</td>
+          </tr>
+          <tr>
+            <td>Smoke &amp; Odor</td>
+            <td>Very low</td>
+            <td>Very low</td>
+          </tr>
+          <tr>
+            <td>Ash Content</td>
+            <td>Low (&lt;3%)*</td>
+            <td>Very low (&lt;2%)*</td>
+          </tr>
+          <tr>
+            <td>Sustainability</td>
+            <td>Made from wood-processing waste</td>
+            <td>Made from coconut shells</td>
+          </tr>
+          <tr>
+            <td>Common Applications</td>
+            <td>BBQ, grilling, heating &amp; industrial use</td>
+            <td>Shisha, cooking &amp; heating</td>
+          </tr>
+          <tr>
+            <td>Product Form</td>
+            <td>Dense, uniform briquettes</td>
+            <td>Dense charcoal briquettes</td>
+          </tr>
+          <tr>
+            <td>Key Advantage</td>
+            <td class="highlight">Long-lasting, consistent heat</td>
+            <td>Low ash &amp; clean burning</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-footnote">*Performance may vary depending on raw material, carbonization conditions, briquette density, size, and actual product specifications.</p>
   </section>
 
   <!-- FOOTER -->
