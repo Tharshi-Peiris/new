@@ -272,6 +272,65 @@
       max-width: 280px;
     }
 
+    /* ── ABOUT SUBTOPIC: PRODUCTION PROCESS ── */
+    .about-subtopic {
+      max-width: 900px;
+      margin: 80px auto 0;
+      text-align: center;
+    }
+
+    .subtopic-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+      margin-bottom: 14px;
+      color: var(--text-dark);
+    }
+
+    .subtopic-desc {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .process-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .process-step {
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .process-arrow {
+      color: var(--orange);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .process-note {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-top: 26px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     /* ── PRODUCTS ── */
     #products {
       padding: 90px 48px;
@@ -418,6 +477,7 @@
       .nav-brand img,
       .nav-center img { height: 56px; }
       #about, #products, #contact { padding: 70px 28px; }
+      .about-subtopic { margin-top: 60px; }
     }
 
     /* Phones (landscape and up) */
@@ -435,6 +495,8 @@
       .hero-logo { margin-top: -30px; }
       #about, #products, #contact { padding: 60px 20px; }
       .section-title { margin-bottom: 40px; }
+      .about-subtopic { margin-top: 48px; }
+      .process-step { font-size: 0.78rem; padding: 10px 14px; }
       .contact-grid { gap: 36px; }
       .product-card img { height: 200px; }
     }
@@ -455,6 +517,9 @@
       .btn-primary, .btn-outline { width: 100%; justify-content: center; padding: 14px 24px; }
       #about, #products, #contact { padding: 48px 16px; }
       .features-grid { gap: 32px; }
+      .about-subtopic { margin-top: 36px; }
+      .process-flow { gap: 8px; }
+      .process-step { font-size: 0.72rem; padding: 9px 12px; }
       .product-body { padding: 20px; }
       .contact-grid { gap: 28px; }
       .btn-contact { width: 100%; justify-content: center; padding: 16px 24px; }
@@ -550,6 +615,28 @@
         <p>Carefully produced and quality-controlled to deliver the best charcoal for your grilling and industrial needs.</p>
       </div>
 
+    </div>
+
+    <!-- SUBTOPIC: PRODUCTION PROCESS -->
+    <div class="about-subtopic">
+      <h3 class="subtopic-title">Our Production Process</h3>
+      <p class="subtopic-desc">Our production process is carefully controlled to achieve consistent quality:</p>
+      <div class="process-flow">
+        <span class="process-step">Raw Material</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Drying</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Briquetting</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Carbonization</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Cooling</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Quality Inspection</span>
+        <span class="process-arrow">&rarr;</span>
+        <span class="process-step">Packaging</span>
+      </div>
+      <p class="process-note">The sawdust is first dried to achieve suitable moisture levels before being compressed into dense briquettes. The briquettes then undergo controlled carbonization in an oxygen-limited environment, converting the compressed biomass into high-quality charcoal. After cooling, the finished product is inspected for consistency and performance before packaging.</p>
     </div>
   </section>
 
