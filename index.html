@@ -311,95 +311,77 @@
     }
 
     .process-flow {
-      counter-reset: step;
       display: flex;
       flex-wrap: wrap;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .process-step {
       position: relative;
       background: #fff;
       border: 1px solid #f3ded4;
-      border-top: 3px solid var(--orange);
+      border-top: 4px solid var(--orange);
       border-radius: 10px;
-      padding: 18px 18px 14px;
-      min-width: 108px;
+      padding: 16px 22px;
+      min-width: 120px;
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.82rem;
+      font-weight: 800;
+      font-size: 1rem;
       color: var(--text-dark);
       box-shadow: 0 2px 10px rgba(232, 73, 15, 0.08);
       opacity: 0;
-      transform: translateY(20px) scale(0.94);
-      transition: opacity 0.5s ease, transform 0.5s ease,
-                  box-shadow 0.25s ease, border-color 0.25s ease;
+      transform: scale(0.3);
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .process-step:hover {
       transform: translateY(-4px) scale(1);
       box-shadow: 0 10px 22px rgba(232, 73, 15, 0.2);
       border-color: var(--orange);
     }
-    .process-step::before {
-      counter-increment: step;
-      content: counter(step);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      margin: 0 auto 10px;
-      border-radius: 50%;
-      background: var(--orange);
-      color: #fff;
-      font-size: 0.72rem;
-      font-weight: 800;
-    }
 
     .process-arrow {
       align-self: center;
       color: var(--orange);
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-size: 1.6rem;
+      font-weight: 900;
+      -webkit-text-stroke: 1px var(--orange);
       opacity: 0;
-      transform: scale(0.6);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: scale(0.3);
     }
 
-    /* Staggered reveal — each child of .process-flow animates in turn */
-    .about-subtopic.in-view .process-flow > *:nth-child(1)  { transition-delay: 0.15s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(2)  { transition-delay: 0.22s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(3)  { transition-delay: 0.29s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(4)  { transition-delay: 0.36s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(5)  { transition-delay: 0.43s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(6)  { transition-delay: 0.50s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(7)  { transition-delay: 0.57s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(8)  { transition-delay: 0.64s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(9)  { transition-delay: 0.71s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(10) { transition-delay: 0.78s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(11) { transition-delay: 0.85s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(12) { transition-delay: 0.92s; }
-    .about-subtopic.in-view .process-flow > *:nth-child(13) { transition-delay: 0.99s; }
+    /* Staggered reveal — each child of .process-flow pops in turn */
+    .about-subtopic.in-view .process-flow > *:nth-child(1)  { animation-delay: 0.15s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(2)  { animation-delay: 0.22s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(3)  { animation-delay: 0.29s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(4)  { animation-delay: 0.36s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(5)  { animation-delay: 0.43s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(6)  { animation-delay: 0.50s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(7)  { animation-delay: 0.57s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(8)  { animation-delay: 0.64s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(9)  { animation-delay: 0.71s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(10) { animation-delay: 0.78s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(11) { animation-delay: 0.85s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(12) { animation-delay: 0.92s; }
+    .about-subtopic.in-view .process-flow > *:nth-child(13) { animation-delay: 0.99s; }
 
-    .about-subtopic.in-view .process-step {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+    .about-subtopic.in-view .process-step,
     .about-subtopic.in-view .process-arrow {
-      opacity: 1;
-      transform: scale(1);
+      animation-name: popIn;
+      animation-duration: 0.6s;
+      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation-fill-mode: forwards;
     }
 
-    /* Gentle continuous pulse on the arrows once revealed */
-    .about-subtopic.in-view .process-arrow {
-      animation: arrowPulse 1.8s ease-in-out infinite;
+    /* Popup box entrance */
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0.3); }
+      60%  { opacity: 1; transform: scale(1.15); }
+      80%  { transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
     }
-    @keyframes arrowPulse {
-      0%, 100% { opacity: 0.55; transform: scale(1); }
-      50%      { opacity: 1;    transform: scale(1.2); }
-    }
+
 
     .process-note {
       font-size: 0.92rem;
@@ -580,7 +562,7 @@
       #about, #products, #contact { padding: 60px 20px; }
       .section-title { margin-bottom: 40px; }
       .about-subtopic { margin-top: 48px; }
-      .process-step { font-size: 0.78rem; padding: 10px 14px; min-width: 90px; }
+      .process-step { font-size: 0.92rem; padding: 14px 18px; min-width: 100px; }
       .contact-grid { gap: 36px; }
       .product-card img { height: 200px; }
     }
@@ -603,8 +585,8 @@
       .features-grid { gap: 32px; }
       .about-subtopic { margin-top: 36px; }
       .process-flow { gap: 8px; }
-      .process-step { font-size: 0.72rem; padding: 9px 12px; min-width: 78px; }
-      .process-step::before { width: 20px; height: 20px; font-size: 0.65rem; }
+      .process-step { font-size: 0.85rem; padding: 12px 16px; min-width: 88px; }
+      .process-arrow { font-size: 1.35rem; }
       .product-body { padding: 20px; }
       .contact-grid { gap: 28px; }
       .btn-contact { width: 100%; justify-content: center; padding: 16px 24px; }
